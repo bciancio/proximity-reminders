@@ -22,7 +22,7 @@ export class AppComponent {
   showMultipleInfoWindows = false;
 
   pins = [{
-      "showInfoWindow": false,
+    "showInfoWindow": false,
     "name": "Downtown",    
     "address": "123 Main Street",
     "pin_coordinates": {
@@ -99,26 +99,43 @@ export class AppComponent {
       }]
     }    
   ]
-
   
+  // ***** Map Events *****
+  // ***** Map Events *****
+
+  // ***** Pin Events *****
+  // ***** Pin Events *****
+  
+  // Whenever a pin is clicked, check the global setting for showing multiple info windows.
+  // If we shouldn't be showing many, then perform logic to hide the "last opened" info window.
   clickedPin(label: string, index: number) {
     if (!this.showMultipleInfoWindows) {
       this.pins[index].showInfoWindow = true;
       if (this.lastOpenedInfoWindowIndex > -1 && this.lastOpenedInfoWindowIndex != index) {
         this.pins[this.lastOpenedInfoWindowIndex].showInfoWindow = false;
       } 
-      this.lastOpenedInfoWindowIndex = index;       
     }
-  }
+    // This should always happen. (scenario that preference is changed)
+    // TODO still a potential bug. Fix is to add logic on this binded field to collpase last opened upon X.
+    this.lastOpenedInfoWindowIndex = index;       
+  }  
 
-  cirlceRadiusChanged(pin: pin, radius: number, index: number) {    
-    this.pins[index].proximity = parseFloat((radius / this.milesToMeters).toFixed(6));
-  }
-  
+  // Whenever you drag a pin around the map this listener gets called.
+  // It keeps the pin coordinates sync'd with the actual interactions.  
   pinDragEnd(pin: pin, result: coords, index: number) {
     this.pins[index].pin_coordinates.lat = parseFloat(result.coords.lat.toFixed(6));
     this.pins[index].pin_coordinates.lng = parseFloat(result.coords.lng.toFixed(6));
   }  
+  
+  // ***** Circle Events *****
+  // ***** Circle Events *****
+
+  // This event will execute when the circle radius is modified
+  // Since the circle is "tied" to the pin we are after changing the radius we want to update the "proximity" of the pin.
+  cirlceRadiusChanged(pin: pin, radius: number, index: number) {    
+    this.pins[index].proximity = parseFloat((radius / this.milesToMeters).toFixed(6));
+  }
+  
 }
 
 // just an interface for type safety.

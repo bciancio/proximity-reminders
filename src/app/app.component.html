@@ -7,13 +7,14 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
 	<div>
-		<div>Mapin Variables:</div>
+		<div>Globals?</div>
 		<ul>
 			<li>latitude: {{ map_options.center_coordinates.lat }}</li>
 			<li>longitude: {{ map_options.center_coordinates.lng }}</li>
-			<li>zoom: {{ map_options.zoom }}</li>
-			<li>lastOpenedInfoWindowIndex: {{ lastOpenedInfoWindowIndex }}</li>
-			<li>showMultipleInfoWindows: {{ showMultipleInfoWindows }}</li>
+			<li>zoom: <input id="map-zoom" max="22" min="1" name="map-zoom" type="number" [(ngModel)]="map_options.zoom"></li>
+			<li>lastOpenedInfoWindowIndex: {{lastOpenedInfoWindowIndex}}</li>		
+			
+			<li>showMultipleInfoWindows: <input type="checkbox" id="multi-info-windows" name="multi-info-windows" [(ngModel)]="showMultipleInfoWindows" /></li>
 		</ul>
 	</div>
 	<div class="main-container">
