@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { log } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Proximity Reminder';  
+  milesToMeters = 1609.34;
   map_options = {
     "zoom": 12,
     "center_coordinates": {
@@ -61,7 +63,7 @@ export class AppComponent {
         "lng": -89.457155
       },
       "active": true,
-      "locked": true,
+      "locked": false,
       "proximity": 1.000006,
       "pinColor": "#0080FF||#4C516D",
       "reminders": [{
@@ -94,19 +96,32 @@ export class AppComponent {
   ]
 
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  clickedPin(label: string, index: number) {
+    console.log(`clicked the pin: ${label || index}`)
   }
 
-  markerDragEnd(m: marker, $event: MouseEvent, index: number) {
-    console.log('dragEnd', m, $event, index);
+  cirlceRadiusChanged(pin: pin, radius: number, index: number) {    
+    this.pins[index].proximity = radius / this.milesToMeters;
   }
+  
+  pinDragEnd(pin: pin, result: coords, index: number) {
+    this.pins[index].pin_coordinates.lat = parseFloat(result.coords.lat.toFixed(6));
+    this.pins[index].pin_coordinates.lng = parseFloat(result.coords.lng.toFixed(6));
+  }  
 }
 
 // just an interface for type safety.
-interface marker {
+interface pin {
   lat: number;
   lng: number;
   label?: string;
   draggable: boolean;
+}
+
+// just an interface for type safety.
+interface coords {
+  coords: {
+    lat: number;
+    lng: number;    
+  }
 }
