@@ -1,11 +1,11 @@
 <div>
 	
 	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
 	
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
 	<div>
 		<div>Mapin Variables:</div>
 		<ul>
@@ -23,24 +23,64 @@
 				[latitude]="pin.pin_coordinates.lat" 
 				[longitude]="pin.pin_coordinates.lng"
 				[label]="pin.name" 
-				[markerDraggable]="pin.draggable" 
+				[markerDraggable]="!pin.locked" 
 				(dragEnd)="markerDragEnd(pin, $event, i)">
+				
+				<agm-circle
+				 [latitude]="pin.pin_coordinates.lat" 
+				 [longitude]="pin.pin_coordinates.lng"
+				 [radius]="pin.proximity * 1609.34"
+				 [fillColor]="'gray'"
+				 [fillOpacity]=".2">					
+				 					
+				</agm-circle>
 
 				<agm-info-window>					
 					<div>
 						<form class="col s12">
 							<div class="row">
-								<div class="input-field col s6">
-									<input name="pin_name" type="text" [(ngModel)]="pin.name">
-									<label for="pin_name" class="active">Name</label>
+								<div>
+									<label for="pin-name" class="active">Name</label>
+									<input name="pin-name" type="text" [(ngModel)]="pin.name">
 								</div>
-								<div class="input-field col s6">
-									<input name="pin_address" type="text" [(ngModel)]="pin.address">
-									<label for="pin_address" class="active">Address</label>
+								<div>
+									<label for="pin-address" class="active">Address</label>
+									<input name="pin-address" type="text" [(ngModel)]="pin.address">
 								</div>
 							</div>
-						</form>
-							
+							<div class="row">
+								<div>
+									<label for="pin-active">Active</label>
+									<input type="checkbox" id="pin-active" name="pin-active" [(ngModel)]="pin.active" />
+								</div>
+								<div>
+									<label for="pin-locked">Locked</label>
+									<input type="checkbox" id="pin-locked" name="pin-locked" [(ngModel)]="pin.locked" />
+								</div>
+								<div>
+									<label for="pin-locked">Proximity</label>
+									<input type="number" id="pin-proximity" name="pin-proximity" [(ngModel)]="pin.proximity" />
+								</div>
+							</div>
+							<div class="">
+								<strong>Reminders</strong>
+							</div>
+							<div *ngFor="let reminder of pin.reminders; let y = index">
+								<div>
+									<label for="reminder-active">Active</label>
+									<input type="checkbox" id="reminder-active" name="reminder-active" [(ngModel)]="reminder.active" />
+									{{reminder.message}} {{reminder.active}}
+								</div>
+							</div>
+							<div class="">
+								<strong>Historic</strong>
+							</div>
+							<div *ngFor="let historicReminder of pin.historic_reminders; let y = index">
+								<div>
+									 {{historicReminder.sent_on}} - {{historicReminder.reminder.message}} 
+								</div>
+							</div>
+						</form>							
 					</div>
 				</agm-info-window>
 			</agm-marker>
