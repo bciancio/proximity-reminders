@@ -17,14 +17,51 @@ export class AppComponent {
   };
   
   pins = [{
-    "pin": {
+    "label": "School",
+    "address": "123 Main Street",
+    "pin_coordinates": {
+      "lat": 43.0730520,
+      "lng": -89.4012300
+    },
+    "draggable": true,
+    "active": true,
+    "pinColor": "#0080FF||#4C516D",
+    "reminders": [{
+      "mesage": "Remember to get X-Y-Z",
+      "active": true,
+      "semantic_version": "2",
+      "proximity": 1.000006,
+      "reoccurring": true
+    }, {
+      "mesage": "Restart computer before you leave.",
+      "active": true,
+      "semantic_version": "2",
+      "proximity": 1.000006,
+      "reoccurring": true
+    }],
+    "historic_reminders": [{
+      "reminder": {
+        "message": "Message@Time",
+        "semantic_version": "1.0"
+      },
+      "sent_on": "1/26/2018 10:21: PM",
+      "recieved_on": "1/26/2018 10:26: PM"
+    }, {
+      "reminder": {
+        "message": "AnotherMessage@Time",
+        "semantic_version": "1.1"
+      },
+      "sent_on": "1/26/2018 10:21: PM",
+      "recieved_on": "1/26/2018 10:26: PM"
+    }]
+  }, {
       "label": "Home",
       "address": "123 Main Street",
       "pin_coordinates": {
-        "lat": 43.0730520,
-        "lng": -89.4012300
+        "lat": 43.011442,
+        "lng": -89.457155
       },
-      "draggable" : true,
+      "draggable": true,
       "active": true,
       "pinColor": "#0080FF||#4C516D",
       "reminders": [{
@@ -34,12 +71,12 @@ export class AppComponent {
         "proximity": 1.000006,
         "reoccurring": true
       }, {
-          "mesage": "Remember to charge phone and set alarm.",
-          "active": true,
-          "semantic_version": "2",
-          "proximity": 1.000006,
-          "reoccurring": true
-        }],
+        "mesage": "Remember to charge phone and set alarm.",
+        "active": true,
+        "semantic_version": "2",
+        "proximity": 1.000006,
+        "reoccurring": true
+      }],
       "historic_reminders": [{
         "reminder": {
           "message": "Message@Time",
@@ -48,15 +85,15 @@ export class AppComponent {
         "sent_on": "1/26/2018 10:21: PM",
         "recieved_on": "1/26/2018 10:26: PM"
       }, {
-          "reminder": {
-            "message": "AnotherMessage@Time",
-            "semantic_version": "1.1"
-          },
-          "sent_on": "1/26/2018 10:21: PM",
-          "recieved_on": "1/26/2018 10:26: PM"
-        }]
-    }
-  }]
+        "reminder": {
+          "message": "AnotherMessage@Time",
+          "semantic_version": "1.1"
+        },
+        "sent_on": "1/26/2018 10:21: PM",
+        "recieved_on": "1/26/2018 10:26: PM"
+      }]
+    }    
+  ]
 
 
   clickedMarker(label: string, index: number) {

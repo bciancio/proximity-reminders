@@ -1,8 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<!--The content below is only a pinlaceholder and can be repinlaced.-->
 
 <div>
 	<div>
-		<div>Map Variables:</div>
+		<div>Mapin Variables:</div>
 		<ul>
 			<li>latitude: {{ map_options.center_coordinates.lat }}</li>
 			<li>longitude: {{ map_options.center_coordinates.lng }}</li>
@@ -11,7 +11,18 @@
 	</div>
 	<div class="main-container">
 		<agm-map [latitude]="map_options.center_coordinates.lat" [longitude]="map_options.center_coordinates.lng" [zoom]="map_options.zoom">
-			<!-- <agm-marker [latitude]="map_options.center_coordinates.lat" [longitude]="map_options.center_coordinates.lng"></agm-marker> -->
+
+			<agm-marker 
+				*ngFor="let pin of pins; let i = index" 
+				(markerClick)="clickedMarker(pin.name, i)" 
+				[latitude]="pin.pin_coordinates.lat" 
+				[longitude]="pin.pin_coordinates.lng"
+				[label]="pin.name" 
+				[markerDraggable]="pin.draggable" 
+				(dragEnd)="markerDragEnd(pin, $event, i)">
+			</agm-marker>
+			
+						
 		</agm-map>
 	</div>
 </div>
