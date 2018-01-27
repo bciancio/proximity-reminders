@@ -18,12 +18,13 @@ export class AppComponent {
   
   pins = [{
     "pin": {
-      "name": "Home",
+      "label": "Home",
       "address": "123 Main Street",
       "pin_coordinates": {
         "lat": 43.0730520,
         "lng": -89.4012300
       },
+      "draggable" : true,
       "active": true,
       "pinColor": "#0080FF||#4C516D",
       "reminders": [{
@@ -57,44 +58,20 @@ export class AppComponent {
     }
   }]
 
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+
+  markerDragEnd(m: marker, $event: MouseEvent, index: number) {
+    console.log('dragEnd', m, $event, index);
+  }
 }
 
-
-// {
-//   "Pin": {
-//     "Name": "Home",
-//       "Address": "123 Main Street",
-//         "Coordinates": {
-//       "Latitude": 90.000006,
-//         "Longitude": 90.000006
-//     },
-//     "Active": true,
-//       "pinColor": "#0080FF||#4C516D",
-//         "History": [{
-//           "Reminder": {
-//             "Mesage": "Message@Time",
-//             "Semantic Version": "1.0"
-//           },
-//           "Sent on": "1/26/2018 10:21: PM",
-//           "Recieved on": "1/26/2018 10:26: PM"
-//         }, {
-//           "Reminder": {
-//             "Mesage": "AnotherMessage@Time",
-//             "Semantic Version": "1.1"
-//           },
-//           "Sent on": "1/26/2018 10:21: PM",
-//           "Recieved on": "1/26/2018 10:26: PM"
-//         }]
-//   },
-//   "Reminder": [{
-//     "Mesage": "Check alternative parking.",
-//     "Active": true,
-//     "Semantic Version": "2"
-//   }, {
-//     "Mesage": "New Message Record starts @ version 1.0",
-//     "Active": false,
-//     "Semantic Version": "1.0"
-//   }],
-//     "Proximity": 1.000006,
-//       "Reoccurring": true
-// }
+// just an interface for type safety.
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
+}
