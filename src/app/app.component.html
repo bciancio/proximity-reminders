@@ -12,6 +12,8 @@
 			<li>latitude: {{ map_options.center_coordinates.lat }}</li>
 			<li>longitude: {{ map_options.center_coordinates.lng }}</li>
 			<li>zoom: {{ map_options.zoom }}</li>
+			<li>lastOpenedInfoWindowIndex: {{ lastOpenedInfoWindowIndex }}</li>
+			<li>showMultipleInfoWindows: {{ showMultipleInfoWindows }}</li>
 		</ul>
 	</div>
 	<div class="main-container">
@@ -37,7 +39,8 @@
 				 (radiusChange)="cirlceRadiusChanged(pin, $event, i)">
 				</agm-circle>
 
-				<agm-info-window>					
+				<agm-info-window
+				 [isOpen]="pin.showInfoWindow">					
 					<div>
 						<form class="col s12">
 							<div class="row">
@@ -48,6 +51,7 @@
 								<div>
 									<label for="pin-address" class="active">Address</label>
 									<input name="pin-address" type="text" [(ngModel)]="pin.address">
+									 <div>{{pin.pin_coordinates.lat}} {{pin.pin_coordinates.lng}}</div>
 								</div>
 							</div>
 							<div class="row">
@@ -69,9 +73,9 @@
 							</div>
 							<div *ngFor="let reminder of pin.reminders; let y = index">
 								<div>
-									<label for="reminder-active">Active</label>
+									<label for="reminder-active">Active</label>									
 									<input type="checkbox" id="reminder-active" name="reminder-active" [(ngModel)]="reminder.active" />
-									{{reminder.message}} {{reminder.active}}
+									<span style="color:red;">{{reminder.active}}</span> {{reminder.message}} 
 								</div>
 							</div>
 							<div class="">

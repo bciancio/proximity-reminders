@@ -18,7 +18,11 @@ export class AppComponent {
     }
   };
   
+  lastOpenedInfoWindowIndex = -1;
+  showMultipleInfoWindows = false;
+
   pins = [{
+      "showInfoWindow": false,
     "name": "Downtown",    
     "address": "123 Main Street",
     "pin_coordinates": {
@@ -56,6 +60,7 @@ export class AppComponent {
       "recieved_on": "1/26/2018 10:26: PM"
     }]
   }, {
+      "showInfoWindow": false,
       "name": "Home",
       "address": "123 Main Street",
       "pin_coordinates": {
@@ -68,7 +73,7 @@ export class AppComponent {
       "pinColor": "#0080FF||#4C516D",
       "reminders": [{
         "message": "Check alternative parking.",
-        "active": true,
+        "active": false,
         "semantic_version": "2",
         "reoccurring": true
       }, {
@@ -95,13 +100,19 @@ export class AppComponent {
     }    
   ]
 
-
+  
   clickedPin(label: string, index: number) {
-    console.log(`clicked the pin: ${label || index}`)
+    if (!this.showMultipleInfoWindows) {
+      this.pins[index].showInfoWindow = true;
+      if (this.lastOpenedInfoWindowIndex > -1 && this.lastOpenedInfoWindowIndex != index) {
+        this.pins[this.lastOpenedInfoWindowIndex].showInfoWindow = false;
+      } 
+      this.lastOpenedInfoWindowIndex = index;       
+    }
   }
 
   cirlceRadiusChanged(pin: pin, radius: number, index: number) {    
-    this.pins[index].proximity = radius / this.milesToMeters;
+    this.pins[index].proximity = parseFloat((radius / this.milesToMeters).toFixed(6));
   }
   
   pinDragEnd(pin: pin, result: coords, index: number) {
