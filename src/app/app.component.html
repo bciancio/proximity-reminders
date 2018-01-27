@@ -1,6 +1,11 @@
-<!--The content below is only a pinlaceholder and can be repinlaced.-->
-
 <div>
+	
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<div>
 		<div>Mapin Variables:</div>
 		<ul>
@@ -20,6 +25,24 @@
 				[label]="pin.name" 
 				[markerDraggable]="pin.draggable" 
 				(dragEnd)="markerDragEnd(pin, $event, i)">
+
+				<agm-info-window>					
+					<div>
+						<form class="col s12">
+							<div class="row">
+								<div class="input-field col s6">
+									<input name="pin_name" type="text" [(ngModel)]="pin.name">
+									<label for="pin_name" class="active">Name</label>
+								</div>
+								<div class="input-field col s6">
+									<input name="pin_address" type="text" [(ngModel)]="pin.address">
+									<label for="pin_address" class="active">Address</label>
+								</div>
+							</div>
+						</form>
+							
+					</div>
+				</agm-info-window>
 			</agm-marker>
 			
 						

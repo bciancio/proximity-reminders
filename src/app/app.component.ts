@@ -17,7 +17,7 @@ export class AppComponent {
   };
   
   pins = [{
-    "label": "School",
+    "name": "School",
     "address": "123 Main Street",
     "pin_coordinates": {
       "lat": 43.0730520,
@@ -55,7 +55,7 @@ export class AppComponent {
       "recieved_on": "1/26/2018 10:26: PM"
     }]
   }, {
-      "label": "Home",
+      "name": "Home",
       "address": "123 Main Street",
       "pin_coordinates": {
         "lat": 43.011442,
