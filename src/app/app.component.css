@@ -1,3 +1,7 @@
 agm-map {
   height: 600px;
 }
+
+.switch, .switch-case {
+  display: inline-block;
+}

@@ -9,8 +9,8 @@
 	<div>
 		<div>Globals?</div>
 		<ul>
-			<li>latitude: {{ map_options.center_coordinates.lat }}</li>
-			<li>longitude: {{ map_options.center_coordinates.lng }}</li>
+			<li><span style="color:red;">latitude:</span> {{ map_options.center_coordinates.lat }}</li>
+			<li><span style="color:red;">longitude:</span> {{ map_options.center_coordinates.lng }}</li>
 			<li>zoom: <input id="map-zoom" max="22" min="1" name="map-zoom" type="number" [(ngModel)]="map_options.zoom"></li>
 			<li>lastOpenedInfoWindowIndex: {{lastOpenedInfoWindowIndex}}</li>		
 			
@@ -35,9 +35,10 @@
 				 [radius]="marker.proximity * milesToMeters"
 				 [fillColor]="'gray'"
 				 [fillOpacity]=".2"
-				 [editable]="true"
+				 [editable]="!marker.locked"
 				 [circleDraggable]="false"
-				 (radiusChange)="cirlceRadiusChanged(marker, $event, markerIndex)">
+				 (radiusChange)="cirlceRadiusChanged(marker, $event, markerIndex)"
+				 (centerChange)="circleCenterChanged(marker, $event, markerIndex)">
 				</agm-circle>
 
 				<agm-info-window
@@ -66,7 +67,15 @@
 								</div>
 								<div>
 									<label for="marker-proximity">Proximity</label>
-									<input type="number" id="marker-proximity" name="marker-proximity" [(ngModel)]="marker.proximity" />
+									<div [ngSwitch]="marker.locked" class="switch">
+										<div *ngSwitchCase="true" class="switch-case">
+											{{marker.proximity}}
+										</div>
+										<div *ngSwitchCase="false" class="switch-case">
+											<input type="number" id="marker-proximity" name="marker-proximity" [(ngModel)]="marker.proximity" />										
+										</div>
+									</div>
+									
 								</div>
 							</div>
 							<div class="">
@@ -76,7 +85,7 @@
 								<div>
 									<label for="reminder-active">Active</label>				
 									<input type="checkbox" id="reminder-active" name="reminder-active" [checked]="reminder.active" (change)='reminderStatusChanged(markerIndex, reminderIndex)'/>
-									<span style="color:red;">{{reminder.active}}</span> {{reminder.message}} 
+									{{reminder.message}} 
 								</div>
 							</div>
 							<div class="">

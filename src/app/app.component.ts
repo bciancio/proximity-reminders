@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { log } from 'util';
+import { MouseEvent } from '@agm/core';
 
 @Component({
   selector: 'app-root',
@@ -102,6 +103,7 @@ export class AppComponent {
    
   // ***** Input Events *****
   // ***** Input Events *****
+  // Whenever a markers reminder has a status change then update the active value
   reminderStatusChanged(markerIndex: number, reminderIndex: number) {
     this.markers[markerIndex].reminders[reminderIndex].active = !this.markers[markerIndex].reminders[reminderIndex].active;
   }
@@ -110,8 +112,7 @@ export class AppComponent {
   // ***** Map Events *****
 
   // ***** Marker Events *****
-  // ***** Marker Events *****
-  
+  // ***** Marker Events *****  
   // Whenever a marker is clicked, check the global setting for showing multiple info windows.
   // If we shouldn't be showing many, then perform logic to hide the "last opened" info window.
   clickedMarker(label: string, markerIndex: number) {
@@ -142,6 +143,10 @@ export class AppComponent {
     this.markers[markerIndex].proximity = parseFloat((radius / this.milesToMeters).toFixed(6));
   }
   
+  circleCenterChanged(marker: marker, latlng: latlng, markerIndex: number) {
+    this.markers[markerIndex].marker_coordinates.lat = parseFloat(latlng.lat.toFixed(6));
+    this.markers[markerIndex].marker_coordinates.lng = parseFloat(latlng.lng.toFixed(6));
+  }  
 }
 
 // just an interface for type safety.
@@ -150,6 +155,11 @@ interface marker {
   lng: number;
   label?: string;
   draggable: boolean;
+}
+
+interface latlng {
+  lat: number;
+  lng: number;
 }
 
 // just an interface for type safety.
