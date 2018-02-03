@@ -5,13 +5,14 @@
 	
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
 	<div>
 		<div>Globals?</div>
 		<ul>
 			<li><span style="color:red;">latitude:</span> {{ map_options.center_coordinates.lat }}</li>
 			<li><span style="color:red;">longitude:</span> {{ map_options.center_coordinates.lng }}</li>
-			<li>zoom: <input id="map-zoom" max="22" min="1" name="map-zoom" type="number" [(ngModel)]="map_options.zoom"></li>
+			<li><span style="color:red;">zoom:</span><input id="map-zoom" max="22" min="1" name="map-zoom" type="number" [(ngModel)]="map_options.zoom"></li>
 			<li>lastOpenedInfoWindowIndex: {{lastOpenedInfoWindowIndex}}</li>		
 			
 			<li>showMultipleInfoWindows: <input type="checkbox" id="multi-info-windows" name="multi-info-windows" [(ngModel)]="showMultipleInfoWindows" /></li>
@@ -44,27 +45,51 @@
 				<agm-info-window
 				 [isOpen]="marker.showInfoWindow">					
 					<div>
-						<form class="col s12">
+						<form class="info-window-form col s12">
 							<div class="row">
-								<div>
+								<div class="input-field col s12">
 									<label for="marker-name" class="active">Name</label>
 									<input name="marker-name" type="text" [(ngModel)]="marker.name">
 								</div>
-								<div>
+							</div>
+							<div class="row">								
+								<div class="input-field col s12">
 									<label for="marker-address" class="active">Address</label>
-									<input name="marker-address" type="text" [(ngModel)]="marker.address">
-									 <div>{{marker.marker_coordinates.lat}} {{marker.marker_coordinates.lng}}</div>
+									<input name="marker-address" type="text" [(ngModel)]="marker.address">									
+									{{marker.marker_coordinates.lat}} {{marker.marker_coordinates.lng}}									
+								</div>
+							</div>
+							<div class="row">	
+								<div class="switch">
+									<label class="valign-wrapper">
+										<div [ngSwitch]="marker.active" class="switch">
+											<div *ngSwitchCase="true" class="switch-case">
+												<i class="material-icons">location_on</i>									
+											</div>
+											<div *ngSwitchCase="false" class="switch-case">
+												<i class="material-icons">location_off</i>
+											</div>
+										</div>	
+										<input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(markerIndex);">
+										<span class="lever"></span>
+									</label>
+								</div>
+								<div class="switch">
+									<label class="valign-wrapper">
+										<div [ngSwitch]="marker.locked" class="switch">
+											<div *ngSwitchCase="true" class="switch-case">
+												<i class="material-icons">lock</i>										
+											</div>
+											<div *ngSwitchCase="false" class="switch-case">
+													<i class="material-icons">lock_open</i>
+											</div>
+										</div>			
+										<input type="checkbox" [checked]="marker.locked" (change)="markerToggleLocked(markerIndex);" >
+										<span class="lever"></span>
+									</label>
 								</div>
 							</div>
 							<div class="row">
-								<div>
-									<label for="marker-active">Active</label>
-									<input type="checkbox" id="marker-active" name="marker-active" [(ngModel)]="marker.active" />
-								</div>
-								<div>
-									<label for="marker-locked">Locked</label>
-									<input type="checkbox" id="marker-locked" name="marker-locked" [(ngModel)]="marker.locked" />
-								</div>
 								<div>
 									<label for="marker-proximity">Proximity</label>
 									<div [ngSwitch]="marker.locked" class="switch">
@@ -74,17 +99,16 @@
 										<div *ngSwitchCase="false" class="switch-case">
 											<input type="number" id="marker-proximity" name="marker-proximity" [(ngModel)]="marker.proximity" />										
 										</div>
-									</div>
-									
+									</div>									
 								</div>
 							</div>
-							<div class="">
+							<div class="row">
 								<strong>Reminders</strong>
 							</div>
 							<div *ngFor="let reminder of marker.reminders; let reminderIndex = index">
 								<div>
 									<label for="reminder-active">Active</label>				
-									<input type="checkbox" id="reminder-active" name="reminder-active" [checked]="reminder.active" (change)='reminderStatusChanged(markerIndex, reminderIndex)'/>
+									<input type="checkbox" id="reminder-active" name="reminder-active" [checked]="reminder.active" (change)='reminderToggleActive(markerIndex, reminderIndex)'/>
 									{{reminder.message}} 
 								</div>
 							</div>

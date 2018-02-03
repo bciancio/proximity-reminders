@@ -5,14 +5,14 @@ import { MouseEvent } from '@agm/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css', '../assets/materialize/css/materialize.min.css']
 })
 
 export class AppComponent {
   title = 'Proximity Reminder';  
   milesToMeters = 1609.34;
   map_options = {
-    "zoom": 12,
+    "zoom": 11,
     "center_coordinates": {
       "lat": 43.0730520,
       "lng": -89.4012300
@@ -23,7 +23,7 @@ export class AppComponent {
   showMultipleInfoWindows = true;
 
   markers = [{
-    "showInfoWindow": false,
+    "showInfoWindow": true,
     "name": "Downtown",    
     "address": "123 Main Street",
     "marker_coordinates": {
@@ -104,7 +104,13 @@ export class AppComponent {
   // ***** Input Events *****
   // ***** Input Events *****
   // Whenever a markers reminder has a status change then update the active value
-  reminderStatusChanged(markerIndex: number, reminderIndex: number) {
+  markerToggleActive(markerIndex: number) {
+    this.markers[markerIndex].active = !this.markers[markerIndex].active;
+  }
+  markerToggleLocked(markerIndex: number) {
+    this.markers[markerIndex].locked = !this.markers[markerIndex].locked;
+  }
+  reminderToggleActive(markerIndex: number, reminderIndex: number) {
     this.markers[markerIndex].reminders[reminderIndex].active = !this.markers[markerIndex].reminders[reminderIndex].active;
   }
 

@@ -5,3 +5,13 @@ agm-map {
 .switch, .switch-case {
   display: inline-block;
 }
+
+input[type="checkbox"] {
+  opacity: 1 !important;
+}
+
+#info-window-form .row, #info-window-form input {
+  margin-bottom: 0px !important;
+  background: black !important;
+  color: aqua !important;
+}
