@@ -19,13 +19,13 @@ export class AppComponent {
   };
   
   lastOpenedInfoWindowIndex = -1;
-  showMultipleInfoWindows = false;
+  showMultipleInfoWindows = true;
 
-  pins = [{
+  markers = [{
     "showInfoWindow": false,
     "name": "Downtown",    
     "address": "123 Main Street",
-    "pin_coordinates": {
+    "marker_coordinates": {
       "lat": 43.0730520,
       "lng": -89.4012300
     },
@@ -63,7 +63,7 @@ export class AppComponent {
       "showInfoWindow": false,
       "name": "Home",
       "address": "123 Main Street",
-      "pin_coordinates": {
+      "marker_coordinates": {
         "lat": 43.011442,
         "lng": -89.457155
       },
@@ -99,47 +99,53 @@ export class AppComponent {
       }]
     }    
   ]
-  
+   
+  // ***** Input Events *****
+  // ***** Input Events *****
+  reminderStatusChanged(markerIndex: number, reminderIndex: number) {
+    this.markers[markerIndex].reminders[reminderIndex].active = !this.markers[markerIndex].reminders[reminderIndex].active;
+  }
+
   // ***** Map Events *****
   // ***** Map Events *****
 
-  // ***** Pin Events *****
-  // ***** Pin Events *****
+  // ***** Marker Events *****
+  // ***** Marker Events *****
   
-  // Whenever a pin is clicked, check the global setting for showing multiple info windows.
+  // Whenever a marker is clicked, check the global setting for showing multiple info windows.
   // If we shouldn't be showing many, then perform logic to hide the "last opened" info window.
-  clickedPin(label: string, index: number) {
+  clickedMarker(label: string, markerIndex: number) {
     if (!this.showMultipleInfoWindows) {
-      this.pins[index].showInfoWindow = true;
-      if (this.lastOpenedInfoWindowIndex > -1 && this.lastOpenedInfoWindowIndex != index) {
-        this.pins[this.lastOpenedInfoWindowIndex].showInfoWindow = false;
+      this.markers[markerIndex].showInfoWindow = true;
+      if (this.lastOpenedInfoWindowIndex > -1 && this.lastOpenedInfoWindowIndex != markerIndex) {
+        this.markers[this.lastOpenedInfoWindowIndex].showInfoWindow = false;
       } 
     }
     // This should always happen. (scenario that preference is changed)
     // TODO still a potential bug. Fix is to add logic on this binded field to collpase last opened upon X.
-    this.lastOpenedInfoWindowIndex = index;       
+    this.lastOpenedInfoWindowIndex = markerIndex;       
   }  
 
-  // Whenever you drag a pin around the map this listener gets called.
-  // It keeps the pin coordinates sync'd with the actual interactions.  
-  pinDragEnd(pin: pin, result: coords, index: number) {
-    this.pins[index].pin_coordinates.lat = parseFloat(result.coords.lat.toFixed(6));
-    this.pins[index].pin_coordinates.lng = parseFloat(result.coords.lng.toFixed(6));
+  // Whenever you drag a marker around the map this listener gets called.
+  // It keeps the marker coordinates sync'd with the actual interactions.  
+  markerDragEnd(marker: marker, result: coords, markerIndex: number) {
+    this.markers[markerIndex].marker_coordinates.lat = parseFloat(result.coords.lat.toFixed(6));
+    this.markers[markerIndex].marker_coordinates.lng = parseFloat(result.coords.lng.toFixed(6));
   }  
   
   // ***** Circle Events *****
   // ***** Circle Events *****
 
   // This event will execute when the circle radius is modified
-  // Since the circle is "tied" to the pin we are after changing the radius we want to update the "proximity" of the pin.
-  cirlceRadiusChanged(pin: pin, radius: number, index: number) {    
-    this.pins[index].proximity = parseFloat((radius / this.milesToMeters).toFixed(6));
+  // Since the circle is "tied" to the marker we are after changing the radius we want to update the "proximity" of the marker.
+  cirlceRadiusChanged(marker: marker, radius: number, markerIndex: number) {    
+    this.markers[markerIndex].proximity = parseFloat((radius / this.milesToMeters).toFixed(6));
   }
   
 }
 
 // just an interface for type safety.
-interface pin {
+interface marker {
   lat: number;
   lng: number;
   label?: string;

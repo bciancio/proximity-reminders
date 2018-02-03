@@ -21,68 +21,68 @@
 		<agm-map [latitude]="map_options.center_coordinates.lat" [longitude]="map_options.center_coordinates.lng" [zoom]="map_options.zoom">
 
 			<agm-marker 
-				*ngFor="let pin of pins; let i = index" 
-				(markerClick)="clickedPin(pin.name, i)" 
-				[latitude]="pin.pin_coordinates.lat" 
-				[longitude]="pin.pin_coordinates.lng"
-				[label]="pin.name" 
-				[markerDraggable]="!pin.locked" 
-				(dragEnd)="pinDragEnd(pin, $event, i)">
+				*ngFor="let marker of markers; let markerIndex = index" 
+				(markerClick)="clickedMarker(marker.name, markerIndex)" 
+				[latitude]="marker.marker_coordinates.lat" 
+				[longitude]="marker.marker_coordinates.lng"
+				[label]="marker.name" 
+				[markerDraggable]="!marker.locked" 
+				(dragEnd)="markerDragEnd(marker, $event, markerIndex)">
 				
 				<agm-circle
-				 [latitude]="pin.pin_coordinates.lat" 
-				 [longitude]="pin.pin_coordinates.lng"
-				 [radius]="pin.proximity * milesToMeters"
+				 [latitude]="marker.marker_coordinates.lat" 
+				 [longitude]="marker.marker_coordinates.lng"
+				 [radius]="marker.proximity * milesToMeters"
 				 [fillColor]="'gray'"
 				 [fillOpacity]=".2"
 				 [editable]="true"
 				 [circleDraggable]="false"
-				 (radiusChange)="cirlceRadiusChanged(pin, $event, i)">
+				 (radiusChange)="cirlceRadiusChanged(marker, $event, markerIndex)">
 				</agm-circle>
 
 				<agm-info-window
-				 [isOpen]="pin.showInfoWindow">					
+				 [isOpen]="marker.showInfoWindow">					
 					<div>
 						<form class="col s12">
 							<div class="row">
 								<div>
-									<label for="pin-name" class="active">Name</label>
-									<input name="pin-name" type="text" [(ngModel)]="pin.name">
+									<label for="marker-name" class="active">Name</label>
+									<input name="marker-name" type="text" [(ngModel)]="marker.name">
 								</div>
 								<div>
-									<label for="pin-address" class="active">Address</label>
-									<input name="pin-address" type="text" [(ngModel)]="pin.address">
-									 <div>{{pin.pin_coordinates.lat}} {{pin.pin_coordinates.lng}}</div>
+									<label for="marker-address" class="active">Address</label>
+									<input name="marker-address" type="text" [(ngModel)]="marker.address">
+									 <div>{{marker.marker_coordinates.lat}} {{marker.marker_coordinates.lng}}</div>
 								</div>
 							</div>
 							<div class="row">
 								<div>
-									<label for="pin-active">Active</label>
-									<input type="checkbox" id="pin-active" name="pin-active" [(ngModel)]="pin.active" />
+									<label for="marker-active">Active</label>
+									<input type="checkbox" id="marker-active" name="marker-active" [(ngModel)]="marker.active" />
 								</div>
 								<div>
-									<label for="pin-locked">Locked</label>
-									<input type="checkbox" id="pin-locked" name="pin-locked" [(ngModel)]="pin.locked" />
+									<label for="marker-locked">Locked</label>
+									<input type="checkbox" id="marker-locked" name="marker-locked" [(ngModel)]="marker.locked" />
 								</div>
 								<div>
-									<label for="pin-proximity">Proximity</label>
-									<input type="number" id="pin-proximity" name="pin-proximity" [(ngModel)]="pin.proximity" />
+									<label for="marker-proximity">Proximity</label>
+									<input type="number" id="marker-proximity" name="marker-proximity" [(ngModel)]="marker.proximity" />
 								</div>
 							</div>
 							<div class="">
 								<strong>Reminders</strong>
 							</div>
-							<div *ngFor="let reminder of pin.reminders; let y = index">
+							<div *ngFor="let reminder of marker.reminders; let reminderIndex = index">
 								<div>
-									<label for="reminder-active">Active</label>									
-									<input type="checkbox" id="reminder-active" name="reminder-active" [(ngModel)]="reminder.active" />
+									<label for="reminder-active">Active</label>				
+									<input type="checkbox" id="reminder-active" name="reminder-active" [checked]="reminder.active" (change)='reminderStatusChanged(markerIndex, reminderIndex)'/>
 									<span style="color:red;">{{reminder.active}}</span> {{reminder.message}} 
 								</div>
 							</div>
 							<div class="">
 								<strong>Historic</strong>
 							</div>
-							<div *ngFor="let historicReminder of pin.historic_reminders; let y = index">
+							<div *ngFor="let historicReminder of marker.historic_reminders; let histReminderIndex = index">
 								<div>
 									 {{historicReminder.sent_on}} - {{historicReminder.reminder.message}} 
 								</div>
