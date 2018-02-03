@@ -20,7 +20,7 @@
 	</div>
 	<div class="main-container">
 		<agm-map [latitude]="map_options.center_coordinates.lat" [longitude]="map_options.center_coordinates.lng" [zoom]="map_options.zoom">
-
+			
 			<agm-marker 
 				*ngFor="let marker of markers; let markerIndex = index" 
 				(markerClick)="clickedMarker(marker.name, markerIndex)" 
@@ -56,15 +56,15 @@
 								<div class="input-field col s12">
 									<label for="marker-address" class="active">Address</label>
 									<input name="marker-address" type="text" [(ngModel)]="marker.address">									
-									{{marker.marker_coordinates.lat}} {{marker.marker_coordinates.lng}}									
+									(lat: {{marker.marker_coordinates.lat}}, lng: {{marker.marker_coordinates.lng}})
 								</div>
 							</div>
-							<div class="row">	
+							<div class="row valign-wrapper">	
 								<div class="switch">
 									<label class="valign-wrapper">
 										<div [ngSwitch]="marker.active" class="switch">
 											<div *ngSwitchCase="true" class="switch-case">
-												<i class="material-icons">location_on</i>									
+												<i class="material-icons">location_on</i>
 											</div>
 											<div *ngSwitchCase="false" class="switch-case">
 												<i class="material-icons">location_off</i>
@@ -88,8 +88,6 @@
 										<span class="lever"></span>
 									</label>
 								</div>
-							</div>
-							<div class="row">
 								<div>
 									<label for="marker-proximity">Proximity</label>
 									<div [ngSwitch]="marker.locked" class="switch">
@@ -103,20 +101,34 @@
 								</div>
 							</div>
 							<div class="row">
+								
+							</div>
+							<div class="row">
 								<strong>Reminders</strong>
 							</div>
 							<div *ngFor="let reminder of marker.reminders; let reminderIndex = index">
-								<div>
-									<label for="reminder-active">Active</label>				
-									<input type="checkbox" id="reminder-active" name="reminder-active" [checked]="reminder.active" (change)='reminderToggleActive(markerIndex, reminderIndex)'/>
+								<div class="row valign-wrapper">
+									<div class="switch">
+										<label class="valign-wrapper">
+											<div [ngSwitch]="reminder.active" class="switch">
+												<div *ngSwitchCase="true" class="switch-case">
+													<i class="material-icons">notifications</i>
+												</div>
+												<div *ngSwitchCase="false" class="switch-case">
+													<i class="material-icons">notifications_off</i>
+												</div>
+											</div>	
+											<input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(markerIndex, reminderIndex);">											
+										</label>
+									</div>
 									{{reminder.message}} 
 								</div>
 							</div>
-							<div class="">
+							<div class="row">
 								<strong>Historic</strong>
 							</div>
 							<div *ngFor="let historicReminder of marker.historic_reminders; let histReminderIndex = index">
-								<div>
+								<div class="row">
 									 {{historicReminder.sent_on}} - {{historicReminder.reminder.message}} 
 								</div>
 							</div>

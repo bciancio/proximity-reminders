@@ -6,12 +6,21 @@ agm-map {
   display: inline-block;
 }
 
+/* TODO Revisit this */
 input[type="checkbox"] {
-  opacity: 1 !important;
+  opacity: 1 !important; 
 }
 
-#info-window-form .row, #info-window-form input {
-  margin-bottom: 0px !important;
-  background: black !important;
-  color: aqua !important;
+.info-window-form .lever {
+  margin: 0px !important;
+  margin-right: 10px !important;
 }
+
+.info-window-form input {
+  margin: 0px !important;
+}
+.info-window-form .row {
+  margin-bottom: 10px;
+}
+
+
