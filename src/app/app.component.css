@@ -1,5 +1,5 @@
 agm-map {
-  height: 600px;
+  height: 800px;
 }
 
 .switch, .switch-case {
@@ -23,4 +23,30 @@ input[type="checkbox"] {
   margin-bottom: 10px;
 }
 
+#sliders-n-proximity {
+  height: 3rem;
+}
 
+#sliders-n-proximity, .reminder-item {
+  padding: 0 .45rem;
+  margin: 0px;
+}
+.historic-item {
+  padding: 0 .75rem;
+}
+.reminder-item, .historic-item {
+  max-width: 400px;
+  margin-bottom: 5px !important;
+}
+
+.active-color-mild {
+  color: #84c7c1;
+}
+.active-color-strong {
+  color: #26a69a;
+}
+
+.italics {
+  font-style: italic;
+  font-weight: bold;
+}

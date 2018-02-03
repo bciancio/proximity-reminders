@@ -8,14 +8,27 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
 	<div>
-		<div>Globals?</div>
+		<div>Global Debug</div>
 		<ul>
-			<li><span style="color:red;">latitude:</span> {{ map_options.center_coordinates.lat }}</li>
-			<li><span style="color:red;">longitude:</span> {{ map_options.center_coordinates.lng }}</li>
-			<li><span style="color:red;">zoom:</span><input id="map-zoom" max="22" min="1" name="map-zoom" type="number" [(ngModel)]="map_options.zoom"></li>
-			<li>lastOpenedInfoWindowIndex: {{lastOpenedInfoWindowIndex}}</li>		
-			
-			<li>showMultipleInfoWindows: <input type="checkbox" id="multi-info-windows" name="multi-info-windows" [(ngModel)]="showMultipleInfoWindows" /></li>
+			<li>
+				<span style="color:red;">latitude:</span>
+				{{ map_options.center_coordinates.lat }}
+			</li>
+			<li>
+				<span style="color:red;">longitude:</span>
+				{{ map_options.center_coordinates.lng }}
+			</li>
+			<li>
+				<span style="color:red;">zoom:</span>
+				<input style="width: 45px; margin-bottom: 10px;" id="map-zoom" max="22" min="1" name="map-zoom" type="number" [(ngModel)]="map_options.zoom">
+			</li>
+			<li>
+				lastOpenedInfoWindowIndex: {{lastOpenedInfoWindowIndex}}
+			</li>	
+			<li>
+				showMultipleInfoWindows: 
+				<input type="checkbox" id="multi-info-windows" name="multi-info-windows" [(ngModel)]="showMultipleInfoWindows" />
+			</li>
 		</ul>
 	</div>
 	<div class="main-container">
@@ -28,7 +41,8 @@
 				[longitude]="marker.marker_coordinates.lng"
 				[label]="marker.name" 
 				[markerDraggable]="!marker.locked" 
-				(dragEnd)="markerDragEnd(marker, $event, markerIndex)">
+				(dragEnd)="markerDragEnd(marker, $event, markerIndex)"
+				[iconUrl]="marker.markerIcon">
 				
 				<agm-circle
 				 [latitude]="marker.marker_coordinates.lat" 
@@ -45,7 +59,8 @@
 				<agm-info-window
 				 [isOpen]="marker.showInfoWindow">					
 					<div>
-						<form class="info-window-form col s12">
+						<form class="info-window-form col s12">							
+							<h6>Marker</h6>
 							<div class="row">
 								<div class="input-field col s12">
 									<label for="marker-name" class="active">Name</label>
@@ -59,19 +74,19 @@
 									(lat: {{marker.marker_coordinates.lat}}, lng: {{marker.marker_coordinates.lng}})
 								</div>
 							</div>
-							<div class="row valign-wrapper">	
+							<div id="sliders-n-proximity" class="row valign-wrapper">	
 								<div class="switch">
 									<label class="valign-wrapper">
 										<div [ngSwitch]="marker.active" class="switch">
 											<div *ngSwitchCase="true" class="switch-case">
-												<i class="material-icons">location_on</i>
+												<i class="material-icons active-color-strong">location_on</i>
 											</div>
 											<div *ngSwitchCase="false" class="switch-case">
 												<i class="material-icons">location_off</i>
 											</div>
 										</div>	
 										<input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(markerIndex);">
-										<span class="lever"></span>
+										<!-- <span class="lever"></span> -->
 									</label>
 								</div>
 								<div class="switch">
@@ -81,11 +96,11 @@
 												<i class="material-icons">lock</i>										
 											</div>
 											<div *ngSwitchCase="false" class="switch-case">
-													<i class="material-icons">lock_open</i>
+													<i class="material-icons active-color-strong">lock_open</i>
 											</div>
 										</div>			
 										<input type="checkbox" [checked]="marker.locked" (change)="markerToggleLocked(markerIndex);" >
-										<span class="lever"></span>
+										<!-- <span class="lever"></span> -->
 									</label>
 								</div>
 								<div>
@@ -100,19 +115,14 @@
 									</div>									
 								</div>
 							</div>
-							<div class="row">
-								
-							</div>
-							<div class="row">
-								<strong>Reminders</strong>
-							</div>
+							<h6>Reminders</h6>
 							<div *ngFor="let reminder of marker.reminders; let reminderIndex = index">
-								<div class="row valign-wrapper">
+								<div class="valign-wrapper reminder-item">
 									<div class="switch">
 										<label class="valign-wrapper">
 											<div [ngSwitch]="reminder.active" class="switch">
 												<div *ngSwitchCase="true" class="switch-case">
-													<i class="material-icons">notifications</i>
+													<i class="material-icons active-color-strong">notifications</i>
 												</div>
 												<div *ngSwitchCase="false" class="switch-case">
 													<i class="material-icons">notifications_off</i>
@@ -124,12 +134,10 @@
 									{{reminder.message}} 
 								</div>
 							</div>
-							<div class="row">
-								<strong>Historic</strong>
-							</div>
+							<h6>Historic</h6>
 							<div *ngFor="let historicReminder of marker.historic_reminders; let histReminderIndex = index">
-								<div class="row">
-									 {{historicReminder.sent_on}} - {{historicReminder.reminder.message}} 
+								<div class="row historic-item">
+									<span class="italics">{{historicReminder.sent_on}}</span> - {{historicReminder.reminder.message}} 
 								</div>
 							</div>
 						</form>							

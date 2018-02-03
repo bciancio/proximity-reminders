@@ -9,10 +9,13 @@ import { MouseEvent } from '@agm/core';
 })
 
 export class AppComponent {
+  markerActiveIcon = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Red.png';
+  markerInactiveIcon = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Grey.png';
+
   title = 'Proximity Reminder';  
   milesToMeters = 1609.34;
   map_options = {
-    "zoom": 11,
+    "zoom": 12,
     "center_coordinates": {
       "lat": 43.0730520,
       "lng": -89.4012300
@@ -23,7 +26,7 @@ export class AppComponent {
   showMultipleInfoWindows = true;
 
   markers = [{
-    "showInfoWindow": true,
+    "showInfoWindow": false,
     "name": "Downtown",    
     "address": "123 Main Street",
     "marker_coordinates": {
@@ -31,11 +34,11 @@ export class AppComponent {
       "lng": -89.4012300
     },
     "active": true,
+    "markerIcon": this.markerActiveIcon,
     "locked": true,
     "proximity": 1.000006,
-    "pinColor": "#0080FF||#4C516D",
     "reminders": [{
-      "message": "One way streets is a thing.",
+      "message": "One way streets are a thing while in this area. Typically \"every other\" parallel street changes",
       "active": true,
       "semantic_version": "2",
       "reoccurring": true
@@ -54,7 +57,7 @@ export class AppComponent {
       "recieved_on": "1/26/2018 10:26: PM"
     }, {
       "reminder": {
-        "message": "B__AnotherMessage@Time",
+        "message": "B__AnotherMessage@Time... WHAT HAPPENS WITH A VERY LONG TEXT FIELD THING?",
         "semantic_version": "1.1"
       },
       "sent_on": "1/26/2018 10:21: PM",
@@ -69,9 +72,9 @@ export class AppComponent {
         "lng": -89.457155
       },
       "active": true,
+      "markerIcon": this.markerActiveIcon,
       "locked": false,
       "proximity": 1.000006,
-      "pinColor": "#0080FF||#4C516D",
       "reminders": [{
         "message": "Check alternative parking.",
         "active": false,
@@ -104,8 +107,14 @@ export class AppComponent {
   // ***** Input Events *****
   // ***** Input Events *****
   // Whenever a markers reminder has a status change then update the active value
-  markerToggleActive(markerIndex: number) {
-    this.markers[markerIndex].active = !this.markers[markerIndex].active;
+  markerToggleActive(markerIndex: number) {    
+    let activeNewVal = !this.markers[markerIndex].active;
+    this.markers[markerIndex].active = activeNewVal;
+    if(activeNewVal) {    
+      this.markers[markerIndex].markerIcon = this.markerActiveIcon;
+    } else {
+      this.markers[markerIndex].markerIcon = this.markerInactiveIcon;      
+    }
   }
   markerToggleLocked(markerIndex: number) {
     this.markers[markerIndex].locked = !this.markers[markerIndex].locked;
