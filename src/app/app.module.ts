@@ -6,11 +6,15 @@ import { CommonModule } from '@angular/common';
 import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
+import { MapComponent } from './components/map.component';
+import { Logger } from './services/logger.service';
+import { MarkerService } from './services/markers.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent    
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,10 @@ import { AppComponent } from './app.component';
       apiKey: 'AIzaSyA_1wXU44uNghJ3ULg1Jks3lcMuCfvsGnI'
     })
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    Logger,
+    MarkerService
+  ],
+  bootstrap: [MapComponent]
 })
 export class AppModule { }
