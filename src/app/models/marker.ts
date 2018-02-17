@@ -13,7 +13,7 @@ export class Marker {
 
     active: boolean;
     locked: boolean;
-    draggable: boolean;
+    show_info_window: boolean;    
 
     constructor() {
 

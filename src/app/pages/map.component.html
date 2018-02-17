@@ -1,27 +1,30 @@
 <div class="map-component">
+    <!-- WHERE ART THIS GO? -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <agm-map [latitude]="map_options.center.lat" [longitude]="map_options.center.lng" [zoom]="map_options.zoom">
         <!-- Using *ngFor (structural directive) loop adding in an agm-marker for each marker in the list of markers. -->
         <agm-marker 
-            *ngFor="let marker of markers; let markerIndex = index" 
-            (markerClick)="clickedMarker(marker.name, markerIndex)" 
-            [latitude]="marker.marker_coordinates.lat" 
-            [longitude]="marker.marker_coordinates.lng"
-            [label]="marker.name" 
+            *ngFor="let marker of markers; let marker_index = index" 
+            (markerClick)="clickedMarker(marker.title, marker_index)" 
+            [latitude]="marker.position.lat" 
+            [longitude]="marker.position.lng"
+            [label]="marker.title" 
             [markerDraggable]="!marker.locked" 
-            (dragEnd)="markerDragEnd(marker, $event, markerIndex)"
-            [iconUrl]="marker.markerIcon">
+            (dragEnd)="markerDragEnd(marker, $event, marker_index)"
+            [iconUrl]="marker.icon">
             
             <!-- For each of the markers include a cricle -->
             <agm-circle
-                [latitude]="marker.marker_coordinates.lat" 
-                [longitude]="marker.marker_coordinates.lng"
-                [radius]="marker.proximity * milesToMeters"
+                [latitude]="marker.position.lat" 
+                [longitude]="marker.position.lng"
+                [radius]="marker.proximity * miles_to_meters"
                 [fillColor]="'gray'"
                 [fillOpacity]=".2"
                 [editable]="!marker.locked"
                 [circleDraggable]="false"
-                (radiusChange)="cirlceRadiusChanged(marker, $event, markerIndex)"
-                (centerChange)="circleCenterChanged(marker, $event, markerIndex)">
+                (radiusChange)="cirlceRadiusChanged(marker, $event, marker_index)"
+                (centerChange)="circleCenterChanged(marker, $event, marker_index)">
             </agm-circle>
 
             <!-- For each marker include an info-window, that can be toggled on and off -->
@@ -33,14 +36,14 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <label for="marker-name" class="active">Name</label>
-                                <input name="marker-name" type="text" [(ngModel)]="marker.name">
+                                <input name="marker-name" type="text" [(ngModel)]="marker.title">
                             </div>
                         </div>
                         <div class="row">								
                             <div class="input-field col s12">
                                 <label for="marker-address" class="active">Address</label>
                                 <input name="marker-address" type="text" [(ngModel)]="marker.address">									
-                                (lat: {{marker.marker_coordinates.lat}}, lng: {{marker.marker_coordinates.lng}})
+                                (lat: {{marker.position.lat}}, lng: {{marker.position.lng}})
                             </div>
                         </div>
                         <div id="sliders-n-proximity" class="row valign-wrapper">	
@@ -54,7 +57,7 @@
                                             <i class="material-icons">location_off</i>
                                         </div>
                                     </div>	
-                                    <input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(markerIndex);">
+                                    <input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(marker_index);">
                                     <!-- <span class="lever"></span> -->
                                 </label>
                             </div>
@@ -68,7 +71,7 @@
                                                 <i class="material-icons active-color-strong">lock_open</i>
                                         </div>
                                     </div>			
-                                    <input type="checkbox" [checked]="marker.locked" (change)="markerToggleLocked(markerIndex);" >
+                                    <input type="checkbox" [checked]="marker.locked" (change)="markerToggleLocked(marker_index);" >
                                     <!-- <span class="lever"></span> -->
                                 </label>
                             </div>
@@ -97,7 +100,7 @@
                                                 <i class="material-icons">notifications_off</i>
                                             </div>
                                         </div>	
-                                        <input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(markerIndex, reminderIndex);">											
+                                        <input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(marker_index, reminderIndex);">											
                                     </label>
                                 </div>
                                 {{reminder.message}} 
@@ -114,4 +117,6 @@
             </agm-info-window>
         </agm-marker>
     </agm-map>
+
+    <marker-detail *ngIf="selected_marker" [selected_marker]="selected_marker"></marker-detail>
 </div>

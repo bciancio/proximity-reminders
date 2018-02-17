@@ -9,17 +9,19 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './components/map.component';
 import { Logger } from './services/logger.service';
 import { MarkerService } from './services/markers.service';
+import { MarkerDetailComponent } from './components/marker-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent    
+    MapComponent,
+    MarkerDetailComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
     FormsModule,
-    CommonModule,
+    CommonModule,    
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA_1wXU44uNghJ3ULg1Jks3lcMuCfvsGnI'
     })
