@@ -1,5 +1,5 @@
 <div class="map-component">
-    <agm-map [latitude]="map_options.center_coordinates.lat" [longitude]="map_options.center_coordinates.lng" [zoom]="map_options.zoom">
+    <agm-map [latitude]="map_options.center.lat" [longitude]="map_options.center.lng" [zoom]="map_options.zoom">
         <!-- Using *ngFor (structural directive) loop adding in an agm-marker for each marker in the list of markers. -->
         <agm-marker 
             *ngFor="let marker of markers; let markerIndex = index" 
