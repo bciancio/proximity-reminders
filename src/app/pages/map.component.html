@@ -1,0 +1,117 @@
+<div class="map-component">
+    <agm-map [latitude]="map_options.center_coordinates.lat" [longitude]="map_options.center_coordinates.lng" [zoom]="map_options.zoom">
+        <!-- Using *ngFor (structural directive) loop adding in an agm-marker for each marker in the list of markers. -->
+        <agm-marker 
+            *ngFor="let marker of markers; let markerIndex = index" 
+            (markerClick)="clickedMarker(marker.name, markerIndex)" 
+            [latitude]="marker.marker_coordinates.lat" 
+            [longitude]="marker.marker_coordinates.lng"
+            [label]="marker.name" 
+            [markerDraggable]="!marker.locked" 
+            (dragEnd)="markerDragEnd(marker, $event, markerIndex)"
+            [iconUrl]="marker.markerIcon">
+            
+            <!-- For each of the markers include a cricle -->
+            <agm-circle
+                [latitude]="marker.marker_coordinates.lat" 
+                [longitude]="marker.marker_coordinates.lng"
+                [radius]="marker.proximity * milesToMeters"
+                [fillColor]="'gray'"
+                [fillOpacity]=".2"
+                [editable]="!marker.locked"
+                [circleDraggable]="false"
+                (radiusChange)="cirlceRadiusChanged(marker, $event, markerIndex)"
+                (centerChange)="circleCenterChanged(marker, $event, markerIndex)">
+            </agm-circle>
+
+            <!-- For each marker include an info-window, that can be toggled on and off -->
+            <agm-info-window
+                [isOpen]="marker.showInfoWindow">					
+                <div>
+                    <form class="info-window-form col s12">							
+                        <h6>Marker</h6>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="marker-name" class="active">Name</label>
+                                <input name="marker-name" type="text" [(ngModel)]="marker.name">
+                            </div>
+                        </div>
+                        <div class="row">								
+                            <div class="input-field col s12">
+                                <label for="marker-address" class="active">Address</label>
+                                <input name="marker-address" type="text" [(ngModel)]="marker.address">									
+                                (lat: {{marker.marker_coordinates.lat}}, lng: {{marker.marker_coordinates.lng}})
+                            </div>
+                        </div>
+                        <div id="sliders-n-proximity" class="row valign-wrapper">	
+                            <div class="switch">
+                                <label class="valign-wrapper">
+                                    <div [ngSwitch]="marker.active" class="switch">
+                                        <div *ngSwitchCase="true" class="switch-case">
+                                            <i class="material-icons active-color-strong">location_on</i>
+                                        </div>
+                                        <div *ngSwitchCase="false" class="switch-case">
+                                            <i class="material-icons">location_off</i>
+                                        </div>
+                                    </div>	
+                                    <input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(markerIndex);">
+                                    <!-- <span class="lever"></span> -->
+                                </label>
+                            </div>
+                            <div class="switch">
+                                <label class="valign-wrapper">
+                                    <div [ngSwitch]="marker.locked" class="switch">
+                                        <div *ngSwitchCase="true" class="switch-case">
+                                            <i class="material-icons">lock</i>										
+                                        </div>
+                                        <div *ngSwitchCase="false" class="switch-case">
+                                                <i class="material-icons active-color-strong">lock_open</i>
+                                        </div>
+                                    </div>			
+                                    <input type="checkbox" [checked]="marker.locked" (change)="markerToggleLocked(markerIndex);" >
+                                    <!-- <span class="lever"></span> -->
+                                </label>
+                            </div>
+                            <div>
+                                <label for="marker-proximity">Proximity</label>
+                                <div [ngSwitch]="marker.locked" class="switch">
+                                    <div *ngSwitchCase="true" class="switch-case">
+                                        {{marker.proximity}}
+                                    </div>
+                                    <div *ngSwitchCase="false" class="switch-case">
+                                        <input type="number" id="marker-proximity" name="marker-proximity" [(ngModel)]="marker.proximity" />										
+                                    </div>
+                                </div>									
+                            </div>
+                        </div>
+                        <h6>Reminders</h6>
+                        <div *ngFor="let reminder of marker.reminders; let reminderIndex = index">
+                            <div class="valign-wrapper reminder-item">
+                                <div class="switch">
+                                    <label class="valign-wrapper">
+                                        <div [ngSwitch]="reminder.active" class="switch">
+                                            <div *ngSwitchCase="true" class="switch-case">
+                                                <i class="material-icons active-color-strong">notifications</i>
+                                            </div>
+                                            <div *ngSwitchCase="false" class="switch-case">
+                                                <i class="material-icons">notifications_off</i>
+                                            </div>
+                                        </div>	
+                                        <input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(markerIndex, reminderIndex);">											
+                                    </label>
+                                </div>
+                                {{reminder.message}} 
+                            </div>
+                        </div>
+                        <h6>Historic</h6>
+                        <div *ngFor="let historicReminder of marker.historic_reminders; let histReminderIndex = index">
+                            <div class="row historic-item">
+                                <span class="italics">{{historicReminder.sent_on}}</span> - {{historicReminder.reminder.message}} 
+                            </div>
+                        </div>
+                    </form>							
+                </div>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+</div>
