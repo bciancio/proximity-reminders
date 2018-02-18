@@ -22,7 +22,7 @@
             [label]="marker.title" 
             [markerDraggable]="!marker.locked" 
             (dragEnd)="markerDragEnd(marker, $event, marker_index)"
-            [iconUrl]="marker.icon">
+            [iconUrl]="marker.icon_current">
             
             <!-- For each of the markers include a cricle -->
             <agm-circle
@@ -38,10 +38,10 @@
             </agm-circle>
 
             <!-- For each marker include an info-window, that can be toggled on and off -->
-            <agm-info-window
-                [isOpen]="marker.showInfoWindow">	
+            <!-- <agm-info-window
+                isOpen="false">	
                 DEPRECATED?				
-                <!-- <div>
+                <div>
                     <form class="info-window-form col s12">							
                         <h6>Marker</h6>
                         <div class="row">
@@ -122,12 +122,12 @@
                             </div>
                         </div>
                     </form>							
-                </div> -->
-            </agm-info-window>
+                </div>
+            </agm-info-window> -->
         </agm-marker>
     </agm-map>
 </div>
 
-<marker-detail *ngIf="selected_marker" [selected_marker]="selected_marker"></marker-detail>
+<markers-list [markers]="markers" [selected_marker]="selected_marker"></markers-list>
 
 

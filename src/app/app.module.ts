@@ -10,13 +10,15 @@ import { MapComponent } from './components/map.component';
 import { Logger } from './services/logger.service';
 import { MarkerService } from './services/markers.service';
 import { MarkerDetailComponent } from './components/marker-detail.component';
+import { MarkersList } from './components/markers-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent,
-    MarkerDetailComponent
+    MapComponent,    
+    MarkerDetailComponent,
+    MarkersList
   ],
   imports: [    
     BrowserModule,

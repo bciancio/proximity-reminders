@@ -5,9 +5,8 @@ import { MouseEvent } from '@agm/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css', '../assets/materialize/css/materialize.min.css']
+  styleUrls: ['./shared.css', '../assets/materialize/css/materialize.min.css']
 })
-
 export class AppComponent {
   markerActiveIcon = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Red.png';
   markerInactiveIcon = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Grey.png';

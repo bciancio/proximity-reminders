@@ -4,8 +4,7 @@
 	}
 
 	.marker-detail {
-		display: inline-block;
-		max-width: 500px;
+		
 		vertical-align: top;
 	}
 
@@ -43,11 +42,11 @@
 	<div class="col s12 m7">
 		<div class="card horizontal">
 			<div class="card-image valign-wrapper">
-				<img [src]="selected_marker.icon">
+				<img [src]="selected_marker.icon_current">
 			</div>
 			<div class="card-stacked small">
 				<div class="card-content">
-					<span class="card-title">Card Title</span>
+					<span class="card-title">{{selected_marker.title}}</span>
 					<div class="row">
 						<div class="input-field col s12">
 							<label for="marker-name" class="active">Name</label>
@@ -65,10 +64,10 @@
 							<label class="valign-wrapper">
 								<div [ngSwitch]="selected_marker.active" class="switch">
 									<div *ngSwitchCase="true" class="switch-case">
-										<i class="material-icons active-color-strong">location_on</i>
+										<i class="material-icons active-color-strong" title="click to deactive marker">location_on</i>
 									</div>
 									<div *ngSwitchCase="false" class="switch-case">
-										<i class="material-icons">location_off</i>
+										<i class="material-icons" title="click to activate marker">location_off</i>
 									</div>
 								</div>
 								<input type="checkbox" [checked]="selected_marker.active" (change)="markerToggleActive(marker_index);">
@@ -79,10 +78,10 @@
 							<label class="valign-wrapper">
 								<div [ngSwitch]="selected_marker.locked" class="switch">
 									<div *ngSwitchCase="true" class="switch-case">
-										<i class="material-icons">lock</i>
+										<i class="material-icons" title="click to unlock marker">lock</i>
 									</div>
 									<div *ngSwitchCase="false" class="switch-case">
-										<i class="material-icons active-color-strong">lock_open</i>
+										<i class="material-icons active-color-strong" title="click to lock marker">lock_open</i>
 									</div>
 								</div>
 								<input type="checkbox" [checked]="selected_marker.locked" (change)="markerToggleLocked(marker_index);">
@@ -103,28 +102,28 @@
 					</div>
 				</div>
 				<h6>Reminders</h6>
-				<div *ngFor="let reminder of selected_marker.reminders; let reminderIndex = index">
+				<div *ngFor="let reminder of selected_marker.reminders; let reminder_index = index">
 					<div class="valign-wrapper reminder-item">
 						<div class="switch">
 							<label class="valign-wrapper">
 								<div [ngSwitch]="reminder.active" class="switch">
 									<div *ngSwitchCase="true" class="switch-case">
-										<i class="material-icons active-color-strong">notifications</i>
+										<i class="material-icons active-color-strong" title="click to turn off notification">notifications</i>
 									</div>
 									<div *ngSwitchCase="false" class="switch-case">
-										<i class="material-icons">notifications_off</i>
+										<i class="material-icons" title="click to turn on notification">notifications_off</i>
 									</div>
 								</div>
-								<input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(marker_index, reminderIndex);">
+								<input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(marker_index, reminder_index);">
 							</label>
 						</div>
 						{{reminder.message}}
 					</div>
 				</div>
 				<h6>Historic</h6>
-				<div *ngFor="let historic_reminder of selected_marker.historic_reminders; let histReminderIndex = index">
+				<div *ngFor="let historic_reminder of selected_marker.historic_reminders; let historic_reminder_index = index">
 					<div class="row historic-item">
-						<span class="italics">{{historic_reminder.sent_on}}</span> - {{historic_reminder.reminder.message}}
+						<span class="italics">{{historic_reminder.sent_on}}</span> - {{historic_reminder.message}}
 					</div>
 				</div>
 			</div>

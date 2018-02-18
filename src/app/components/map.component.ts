@@ -10,7 +10,7 @@ import { Logger } from '../services/logger.service';
 @Component({
     selector: 'app-root',
     templateUrl: '../pages/map.component.html',
-    styleUrls: ['../pages/map.component.css', '../../assets/materialize/css/materialize.min.css'],
+    styleUrls: ['../pages/map.component.css', '../../assets/materialize/css/materialize.min.css', '../shared.css'],
     providers: [MarkerService, Logger]
 })
 export class MapComponent {

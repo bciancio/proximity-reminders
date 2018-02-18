@@ -4,8 +4,8 @@ export class HistoricReminder {
     
     message: string;
 
-    sent_on: DateTimeFormat;
-    recieved_on: DateTimeFormat;
+    sent_on: string; // TODO some type of date/time?
+    recieved_on: string; // TODO some type of date/time?
 
     constructor() {
 

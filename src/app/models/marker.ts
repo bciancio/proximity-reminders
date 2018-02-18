@@ -9,7 +9,8 @@ export class Marker {
 
     title: string;
     address: string;
-    icon: string;
+    icon_current: string;
+    icon_active: string;
 
     position: LatLng|LatLngLiteral
 

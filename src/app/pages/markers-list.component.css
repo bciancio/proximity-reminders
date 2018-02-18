@@ -1,0 +1,8 @@
+.markers-list {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.markers-list .unselected-markers {
+    display: inline-block
+}
