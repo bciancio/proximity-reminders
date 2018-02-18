@@ -1,22 +1,27 @@
-agm-map {
-  height: 800px;
+.italics {
+  font-style: italic;
+  font-weight: bold;
 }
 
-.switch, .switch-case {
+/* agm-map {
+  height: 800px;
+} */
+
+/* .switch, .switch-case {
   display: inline-block;
-}
+} */
 
 /* TODO Revisit this */
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   opacity: 1 !important; 
-}
+} */
 
-.info-window-form .lever {
+/* .info-window-form .lever {
   margin: 0px !important;
   margin-right: 10px !important;
-}
+} */
 
-.info-window-form input {
+/* .info-window-form input {
   margin: 0px !important;
 }
 .info-window-form .row {
@@ -25,28 +30,16 @@ input[type="checkbox"] {
 
 #sliders-n-proximity {
   height: 3rem;
-}
+} */
 
-#sliders-n-proximity, .reminder-item {
+/* #sliders-n-proximity, .reminder-item {
   padding: 0 .45rem;
   margin: 0px;
 }
 .historic-item {
   padding: 0 .75rem;
-}
-.reminder-item, .historic-item {
-  max-width: 400px;
-  margin-bottom: 5px !important;
-}
+} */
 
-.active-color-mild {
-  color: #84c7c1;
-}
-.active-color-strong {
-  color: #26a69a;
-}
 
-.italics {
-  font-style: italic;
-  font-weight: bold;
-}
+
+

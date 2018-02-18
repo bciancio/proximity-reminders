@@ -41,25 +41,7 @@ export class MapComponent {
     }
 
 
-    // ***** Input Events *****
-    // ***** Input Events *****
-    // Whenever a markers reminder has a status change then update the active value
-    markerToggleActive(marker_index: number) {        
-        let new_active_value = !this.markers[marker_index].active;
-        this.markers[marker_index].active = new_active_value;
-        if (new_active_value) {
-            // this.markers[marker_index].markerIcon = this.markerActiveIcon; // TODO
-        } else {
-            // this.markers[marker_index].markerIcon = this.markerInactiveIcon; // TODO
-        }
-    }
-    markerToggleLocked(marker_index: number) {
-        this.markers[marker_index].locked = !this.markers[marker_index].locked;
-    }
-    reminderToggleActive(marker_index: number, reminder_index: number) {
-        // let new_active_value = !this.markers[marker_index].reminders[reminder_index].active;
-        // this.markers[marker_index].reminders[reminder_index].active = new_active_value // TODO
-    }
+   
 
     // ***** Map Events *****
     // ***** Map Events *****

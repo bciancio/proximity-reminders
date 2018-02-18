@@ -1,4 +1,4 @@
-export class ReminderHistory {
+export class HistoricReminder {
 
     id: number; // TODO
     

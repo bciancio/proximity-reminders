@@ -1,4 +1,133 @@
+<style>
+	.marker-detail .card-image img {
+		cursor: pointer;
+	}
+
+	.marker-detail {
+		display: inline-block;
+		max-width: 500px;
+		vertical-align: top;
+	}
+
+	.reminder-item,
+	.historic-item {
+		max-width: 400px;
+		margin-bottom: 5px !important;
+	}
+
+	.active-color-mild {
+		color: #84c7c1;
+	}
+
+	.active-color-strong {
+		color: #26a69a;
+	}
+
+	
+#sliders-n-proximity {
+  height: 3rem;
+}
+
+#sliders-n-proximity, .reminder-item {
+  padding: 0 .45rem;
+  margin: 0px;
+}
+
+.historic-item {
+  padding: 0 .75rem;
+}
+
+</style>
+
 <div class="marker-detail">
-    HELLO WORLD!
-    {{ selected_marker.title }}    
+	<div class="col s12 m7">
+		<div class="card horizontal">
+			<div class="card-image valign-wrapper">
+				<img [src]="selected_marker.icon">
+			</div>
+			<div class="card-stacked small">
+				<div class="card-content">
+					<span class="card-title">Card Title</span>
+					<div class="row">
+						<div class="input-field col s12">
+							<label for="marker-name" class="active">Name</label>
+							<input name="marker-name" type="text" [(ngModel)]="selected_marker.title">
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<label for="marker-address" class="active">Address</label>
+							<input name="marker-address" type="text" [(ngModel)]="selected_marker.address"> (lat: {{selected_marker.position.lat}}, lng: {{selected_marker.position.lng}})
+						</div>
+					</div>
+					<div id="sliders-n-proximity" class="row valign-wrapper">
+						<div class="switch">
+							<label class="valign-wrapper">
+								<div [ngSwitch]="selected_marker.active" class="switch">
+									<div *ngSwitchCase="true" class="switch-case">
+										<i class="material-icons active-color-strong">location_on</i>
+									</div>
+									<div *ngSwitchCase="false" class="switch-case">
+										<i class="material-icons">location_off</i>
+									</div>
+								</div>
+								<input type="checkbox" [checked]="selected_marker.active" (change)="markerToggleActive(marker_index);">
+								<!-- <span class="lever"></span> -->
+							</label>
+						</div>
+						<div class="switch">
+							<label class="valign-wrapper">
+								<div [ngSwitch]="selected_marker.locked" class="switch">
+									<div *ngSwitchCase="true" class="switch-case">
+										<i class="material-icons">lock</i>
+									</div>
+									<div *ngSwitchCase="false" class="switch-case">
+										<i class="material-icons active-color-strong">lock_open</i>
+									</div>
+								</div>
+								<input type="checkbox" [checked]="selected_marker.locked" (change)="markerToggleLocked(marker_index);">
+								<!-- <span class="lever"></span> -->
+							</label>
+						</div>
+					</div>
+					<div>
+						<label for="marker-proximity">Proximity</label>
+						<div [ngSwitch]="selected_marker.locked" class="switch">
+							<div *ngSwitchCase="true" class="switch-case">
+								{{selected_marker.proximity}}
+							</div>
+							<div *ngSwitchCase="false" class="switch-case">
+								<input type="number" id="marker-proximity" name="marker-proximity" [(ngModel)]="selected_marker.proximity" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<h6>Reminders</h6>
+				<div *ngFor="let reminder of selected_marker.reminders; let reminderIndex = index">
+					<div class="valign-wrapper reminder-item">
+						<div class="switch">
+							<label class="valign-wrapper">
+								<div [ngSwitch]="reminder.active" class="switch">
+									<div *ngSwitchCase="true" class="switch-case">
+										<i class="material-icons active-color-strong">notifications</i>
+									</div>
+									<div *ngSwitchCase="false" class="switch-case">
+										<i class="material-icons">notifications_off</i>
+									</div>
+								</div>
+								<input type="checkbox" [checked]="reminder.active" (change)="reminderToggleActive(marker_index, reminderIndex);">
+							</label>
+						</div>
+						{{reminder.message}}
+					</div>
+				</div>
+				<h6>Historic</h6>
+				<div *ngFor="let historic_reminder of selected_marker.historic_reminders; let histReminderIndex = index">
+					<div class="row historic-item">
+						<span class="italics">{{historic_reminder.sent_on}}</span> - {{historic_reminder.reminder.message}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
