@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { log } from 'util';
 
 import { MouseEvent } from '@agm/core';
 import { Marker } from '../models/marker';
@@ -30,7 +29,6 @@ export class MapComponent {
     markers: Marker[];
     selected_marker: Marker;
     
-    
     ngOnInit() {
         this.markers = this.marker_service.getMarkers();        
     }
@@ -40,9 +38,6 @@ export class MapComponent {
         this.logger.log(this.selected_marker);
     }
 
-
-   
-
     // ***** Map Events *****
     // ***** Map Events *****
 
@@ -51,6 +46,8 @@ export class MapComponent {
 
     // When a marker is clicked, change the "selected" marker.
     clickedMarker(label: string, marker_index: number) {
+        // this.markers[marker_index].locked = false;
+        // NOTE: Not sure that it makes sense to lock... this way tpye of thing.
         this.selectMarker(this.markers[marker_index]);     
     }
 

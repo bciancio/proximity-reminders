@@ -1,5 +1,5 @@
 <div class="markers-list">
-        <map-actions></map-actions>
+	<map-actions [(markers)]="markers"></map-actions>
 	<span *ngIf="selected_marker">
 		<marker-card [marker]="selected_marker"></marker-card>
 	</span>

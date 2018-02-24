@@ -11,7 +11,7 @@ export class MarkerService {
     }
 
     getMarkers() {
-              
+
         this.markers = [];
 
         this.buildMockData();   // TODO database call
@@ -19,6 +19,11 @@ export class MarkerService {
         this.logger.log(this.markers);
         
         return this.markers;
+    }
+
+    addNewMarker(new_marker : Marker) { 
+        new_marker.id = 999; // TODO
+        this.markers.push(new_marker);
     }
 
     buildMockData() {

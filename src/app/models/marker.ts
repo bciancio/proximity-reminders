@@ -22,6 +22,11 @@ export class Marker {
     historic_reminders: HistoricReminder[];
 
     constructor() {
-
+        this.active = true;
+        this.locked = false;
+        this.show_info_window = false;
+        this.historic_reminders = [];
+        this.icon_current = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Red.png';
+        this.icon_active = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Red.png';
     }
 }

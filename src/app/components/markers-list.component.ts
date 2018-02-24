@@ -16,5 +16,5 @@ export class MarkersList {
     @Input() markers: Marker[];
     
     // Grab the selected marker either: from the map or the list. 
-    @Input() selected_marker: Marker;
+    @Input() selected_marker: Marker;    
 }
