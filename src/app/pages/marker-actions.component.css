@@ -1,0 +1,14 @@
+.marker-actions .marker-action, .marker-actions .switch, .marker-actions .switch-case {
+    display: inline;    
+}
+.marker-actions .marker-action {
+    cursor: pointer;
+}
+
+.marker-actions .active-color-mild {
+    color: #84c7c1;
+}
+
+.marker-actions .active-color-strong {
+    color: #26a69a;
+}

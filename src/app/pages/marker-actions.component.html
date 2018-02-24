@@ -1,0 +1,33 @@
+<div class="marker-actions">
+	<div class="switch marker-action">
+		<label>
+			<div [ngSwitch]="marker.active" class="switch">
+				<div *ngSwitchCase="true" class="switch-case">
+					<i class="material-icons active-color-strong" title="click to deactive marker">location_on</i>
+				</div>
+				<div *ngSwitchCase="false" class="switch-case">
+					<i class="material-icons" title="click to activate marker">location_off</i>
+				</div>
+			</div>
+			<input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(marker_index);">
+		</label>
+	</div>
+	<div class="marker-action" *ngIf="show_view_page_icon">
+		<label>
+			<i class="material-icons" title="click to view details">pageview</i>
+		</label>
+	</div>
+	<div class="switch marker-action">
+		<label>
+			<div [ngSwitch]="marker.locked||!marker.active" class="switch">
+				<div *ngSwitchCase="true" class="switch-case">
+					<i class="material-icons" title="click to unlock marker">lock</i>
+				</div>
+				<div *ngSwitchCase="false" class="switch-case">
+					<i class="material-icons active-color-strong" title="click to lock marker">lock_open</i>
+				</div>
+			</div>
+			<input type="checkbox" [checked]="marker.locked" (change)="markerToggleLocked(marker_index);">
+		</label>
+	</div>
+</div>

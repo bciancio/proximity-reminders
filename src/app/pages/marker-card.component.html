@@ -1,3 +1,22 @@
-<p>
-  marker-card works!
-</p>
+<div class="marker-card">
+	<div class="col s12 m7">
+		<div class="card horizontal">
+			<div class="card-image valign-wrapper">
+				<img [src]="marker.icon_current">
+			</div>
+			<div class="card-stacked">
+				<div class="card-content">
+					<div>
+						{{ marker.title }}
+					</div>
+					<div>
+						{{ marker.address }}
+					</div>
+				</div>
+				<div class="card-action">
+					<marker-actions [marker]="marker"></marker-actions>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

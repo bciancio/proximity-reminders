@@ -60,35 +60,7 @@
 						</div>
 					</div>
 					<div id="sliders-n-proximity" class="row valign-wrapper">
-						<div class="switch">
-							<label class="valign-wrapper">
-								<div [ngSwitch]="selected_marker.active" class="switch">
-									<div *ngSwitchCase="true" class="switch-case">
-										<i class="material-icons active-color-strong" title="click to deactive marker">location_on</i>
-									</div>
-									<div *ngSwitchCase="false" class="switch-case">
-										<i class="material-icons" title="click to activate marker">location_off</i>
-									</div>
-								</div>
-								<input type="checkbox" [checked]="selected_marker.active" (change)="markerToggleActive(marker_index);">
-								<!-- <span class="lever"></span> -->
-							</label>
-						</div>
-						<div class="switch">
-							<label class="valign-wrapper">
-								<div [ngSwitch]="selected_marker.locked" class="switch">
-									<div *ngSwitchCase="true" class="switch-case">
-										<i class="material-icons" title="click to unlock marker">lock</i>
-									</div>
-									<div *ngSwitchCase="false" class="switch-case">
-										<i class="material-icons active-color-strong" title="click to lock marker">lock_open</i>
-									</div>
-								</div>
-								<input type="checkbox" [checked]="selected_marker.locked" (change)="markerToggleLocked(marker_index);">
-								<!-- <span class="lever"></span> -->
-							</label>
-						</div>
-					</div>
+						<marker-actions [marker]="selected_marker"></marker-actions>
 					<div>
 						<label for="marker-proximity">Proximity</label>
 						<div [ngSwitch]="selected_marker.locked" class="switch">

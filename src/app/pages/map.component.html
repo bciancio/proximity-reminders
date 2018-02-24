@@ -1,10 +1,3 @@
-<style>
-    .map-component {
-        display: inline-block;
-        /* TODO: Has to be a better way... */
-        width: calc(100% - 505px); 
-    }
-</style>
 <!-- <div class="valign-wrapper">    
     <i style="color: red" class="material-icons">settings_applications</i> TODO -- ADD PREFERENCE PAGE OR MODAL?
 </div> -->
@@ -35,7 +28,7 @@
                 [radius]="marker.proximity * miles_to_meters"
                 [fillColor]="'gray'"
                 [fillOpacity]=".2"
-                [editable]="!marker.locked"
+                [editable]="!marker.locked&&marker.active"
                 [circleDraggable]="false"
                 (radiusChange)="cirlceRadiusChanged(marker, $event, marker_index)"
                 (centerChange)="circleCenterChanged(marker, $event, marker_index)">

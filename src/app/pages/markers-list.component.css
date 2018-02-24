@@ -1,6 +1,7 @@
 .markers-list {
     display: inline-block;
     vertical-align: top;
+    max-width: 300px;
 }
 
 .markers-list .unselected-markers {

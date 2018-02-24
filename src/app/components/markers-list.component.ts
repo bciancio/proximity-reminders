@@ -12,6 +12,9 @@ export class MarkersList {
     
     constructor(private logger: Logger) {}
     
-    @Input() markers: Marker[];    
+    // Grab all the markers from the map
+    @Input() markers: Marker[];
+    
+    // Grab the selected marker either: from the map or the list. 
     @Input() selected_marker: Marker;
 }

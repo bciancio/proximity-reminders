@@ -1,11 +1,11 @@
-<style>
-    .markers-list {
-        max-width: 500px;
-    }
-</style>
 <div class="markers-list">
-    <marker-detail *ngIf="selected_marker" [selected_marker]="selected_marker"></marker-detail>
-    <div class="unselected-markers" *ngFor="let marker of markers; let marker_index = index">
-        
-    </div>
+        <map-actions></map-actions>
+	<span *ngIf="selected_marker">
+		<marker-card [marker]="selected_marker"></marker-card>
+	</span>
+	<div class="unselected-markers" *ngFor="let marker of markers; let marker_index = index">
+		<span *ngIf="marker != selected_marker">
+			<marker-card [marker]="marker"></marker-card>
+		</span>
+	</div>
 </div>

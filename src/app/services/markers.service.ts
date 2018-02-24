@@ -113,8 +113,100 @@ export class MarkerService {
             }, 
         ]
 
+        let marker3: Marker = new Marker();
+        marker3.id = 1;
+        marker3.proximity = 1.000006;
+
+        marker3.title = 'Name - 3';
+        marker3.address = 'Address - 3';
+        marker3.icon_current = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Green.png';
+        marker3.icon_active = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Green.png';
+
+        marker3.position = {
+            lat: 43.03040258,
+            lng: -89.3796006
+        };
+
+        marker3.active = true;
+        marker3.locked = false;    
+        marker3.show_info_window = false;    
+        marker3.reminders = [
+            {
+                id: 4,
+                message: "Sir Whiskers",            
+                active: true,
+                reoccuring: false
+            },{
+                id: 5,
+                message: "El Gato",            
+                active: false,
+                reoccuring: true
+            }, 
+        ];
+
+        marker3.historic_reminders = [
+            {
+                id: 4,
+                message: "Longshanks",            
+                sent_on: '02/17/18',
+                recieved_on: '02/17/18'
+            },{
+                id: 5,
+                message: "Barthlomeow",            
+                sent_on: '02/17/18',
+                recieved_on: '02/17/18'
+            }, 
+        ]
+
+        let marker4: Marker = new Marker();
+        marker4.id = 1;
+        marker4.proximity = 2.562436;
+
+        marker4.title = 'Name - 4';
+        marker4.address = 'Address - 4';
+        marker4.icon_current = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Azure.png';
+        marker4.icon_active = 'assets/IconsLandFlatRasterMapMarkersIcons/png/centered/48x48/MapMarker_Marker__Azure.png';
+
+        marker4.position = {
+            lat: 43.03391600,
+            lng: -89.4232025
+        };
+
+        marker4.active = true;
+        marker4.locked = true;    
+        marker4.show_info_window = false;    
+        marker4.reminders = [
+            {
+                id: 4,
+                message: "Clawdia",            
+                active: true,
+                reoccuring: false
+            },{
+                id: 5,
+                message: "Jennifurr",            
+                active: false,
+                reoccuring: true
+            }, 
+        ];
+
+        marker4.historic_reminders = [
+            {
+                id: 5,
+                message: "Katy Purry",            
+                sent_on: '02/17/18',
+                recieved_on: '02/17/18'
+            },{
+                id: 6,
+                message: "Tabbytha",            
+                sent_on: '02/17/18',
+                recieved_on: '02/17/18'
+            }, 
+        ]
+
         this.markers.push(marker1);
         this.markers.push(marker2);
+        this.markers.push(marker3);
+        this.markers.push(marker4);
     }
 
 }
