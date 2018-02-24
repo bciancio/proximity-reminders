@@ -28,7 +28,7 @@ export class MapComponent {
 
     markers: Marker[];
     selected_marker: Marker;
-    
+
     ngOnInit() {
         this.markers = this.marker_service.getMarkers();        
     }
@@ -42,7 +42,11 @@ export class MapComponent {
     // ***** Map Events *****
 
     // ***** Marker Events *****
-    // ***** Marker Events *****  
+    // ***** Marker Events ***** 
+    addNewMarker(new_marker: Marker) {
+        this.markers.push(new_marker)
+        this.logger.log(new_marker);
+    }
 
     // When a marker is clicked, change the "selected" marker.
     clickedMarker(label: string, marker_index: number) {

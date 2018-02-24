@@ -1,4 +1,6 @@
 .map-actions {
+    display: inline-block;
+    vertical-align: top;    
     text-align: center;
     width: var(--side-left-width);
 }

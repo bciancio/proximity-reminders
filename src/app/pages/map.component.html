@@ -2,7 +2,10 @@
     <i style="color: red" class="material-icons">settings_applications</i> TODO -- ADD PREFERENCE PAGE OR MODAL?
 </div> -->
 
-<markers-list [markers]="markers" [selected_marker]="selected_marker"></markers-list>
+<div class="left-side">
+    <map-actions (onAddMarker)="addNewMarker($event)"></map-actions>    
+    <markers-list [markers]="markers" [selected_marker]="selected_marker"></markers-list>
+</div>
 
 <div class="map-component">
     <!-- TODO: WHERE ART THIS GO? -->

@@ -1,26 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Logger } from '../services/logger.service';
-import { MarkerService } from '../services/markers.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Marker } from '../models/marker';
+import { Logger } from '../services/logger.service';
 
 @Component({
     selector: 'map-actions',
     templateUrl: '../pages/map-actions.component.html',
 	styleUrls: ['../pages/map-actions.component.css', '../../assets/materialize/css/materialize.min.css', '../shared.css'],
-	providers: [MarkerService, Logger]
+	providers: [ Logger ]
 })
 export class MapActionsComponent implements OnInit {
 
-	constructor(private marker_service: MarkerService, private logger: Logger) {}
+	constructor(private logger: Logger) {}
 
 	ngOnInit() {
 
 	}
 
-	@Input() markers: Marker[];
+	@Output() onAddMarker = new EventEmitter<Marker>();
 
 	geo_navigator = navigator.geolocation;
-	search_address: string;
+	
+	
+	search_address: string = "TEST";
 	
 	addCurrentLocation() {
 		let new_marker = new Marker();
@@ -28,20 +29,21 @@ export class MapActionsComponent implements OnInit {
 		new_marker.title = 'TEST';
 		new_marker.address = 'TEST';
 		new_marker.position = {};
-		console.log(new_marker);
 		
+		let actual_this = this;
 		if (this.geo_navigator) {
-			
+
 			this.geo_navigator.getCurrentPosition(function (position) {							
 				new_marker.position.lat = position.coords.latitude;
-				new_marker.position.lng = position.coords.longitude;
-
-				this.markers.push(new_marker);
-				// this.marker_service.addNewMarker(new_marker);
+				new_marker.position.lng = position.coords.longitude;			
+				
+				actual_this.logger.log('emitting new_marker to  the map component.');
+				
+				actual_this.onAddMarker.emit(new_marker);
 			});
 
 		} else {			
-			alert('No Geolocation Support.');
+			actual_this.logger.log('No Geolocation Support.');			
 		}
 	}
 }
