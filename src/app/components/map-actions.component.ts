@@ -35,10 +35,8 @@ export class MapActionsComponent implements OnInit {
 
 			this.geo_navigator.getCurrentPosition(function (position) {							
 				new_marker.position.lat = position.coords.latitude;
-				new_marker.position.lng = position.coords.longitude;			
-				
-				actual_this.logger.log('emitting new_marker to  the map component.');
-				
+				new_marker.position.lng = position.coords.longitude;
+
 				actual_this.onAddMarker.emit(new_marker);
 			});
 

@@ -44,7 +44,7 @@ export class MapComponent {
     // ***** Marker Events *****
     // ***** Marker Events ***** 
     addNewMarker(new_marker: Marker) {
-        this.markers.push(new_marker)
+        this.markers.push(new_marker)        
         this.logger.log(new_marker);
     }
 
