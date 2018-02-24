@@ -6,8 +6,6 @@
 <div class="markers-list">
     <marker-detail *ngIf="selected_marker" [selected_marker]="selected_marker"></marker-detail>
     <div class="unselected-markers" *ngFor="let marker of markers; let marker_index = index">
-        <span *ngIf="marker != selected_marker">
-            <marker-detail [selected_marker]="marker"></marker-detail>
-        </span>
+        
     </div>
 </div>
