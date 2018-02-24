@@ -11,6 +11,7 @@ import { Logger } from './services/logger.service';
 import { MarkerService } from './services/markers.service';
 import { MarkerDetailComponent } from './components/marker-detail.component';
 import { MarkersList } from './components/markers-list.component';
+import { MarkerCardComponent } from './components/marker-card.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MarkersList } from './components/markers-list.component';
     AppComponent,
     MapComponent,    
     MarkerDetailComponent,
-    MarkersList
+    MarkersList,
+    MarkerCardComponent
   ],
   imports: [    
     BrowserModule,
