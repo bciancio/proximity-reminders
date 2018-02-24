@@ -43,6 +43,9 @@
         </agm-marker>
     </agm-map>
 </div>
+<span *ngIf="selected_marker">
+    <marker-detail [selected_marker]="selected_marker"></marker-detail>     
+</span>
 
 
 
