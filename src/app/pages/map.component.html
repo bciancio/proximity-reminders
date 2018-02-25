@@ -1,16 +1,23 @@
-<!-- <div class="valign-wrapper">    
-    <i style="color: red" class="material-icons">settings_applications</i> TODO -- ADD PREFERENCE PAGE OR MODAL?
-</div> -->
+<!-- TODO: WHERE ART THIS GO? -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="left-side">
-    <map-actions (onAddMarker)="addNewMarker($event)"></map-actions>    
-    <markers-list [markers]="markers" [selected_marker]="selected_marker"></markers-list>
+    <map-actions 
+        (onAddMarker)="addNewMarker($event)">
+    </map-actions>    
+    <markers-list 
+        [markers]="markers" 
+        [selected_marker]="selected_marker"
+        (onViewMarkerDetailsOverlay)="displayMarkerDetailsOverlay($event)">
+    </markers-list>
 </div>
 
 <div class="map-component">
-    <!-- TODO: WHERE ART THIS GO? -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+    <div *ngIf="selected_marker&&selected_marker.show_details_overlay" class="map-marker-detial-overlay">        
+        <marker-detail 
+            [selected_marker]="selected_marker">
+        </marker-detail>            
+    </div>    
 
     <agm-map [latitude]="map_options.center.lat" [longitude]="map_options.center.lng" [zoom]="map_options.zoom">
         <!-- Using *ngFor (structural directive) loop adding in an agm-marker for each marker in the list of markers. -->
@@ -39,9 +46,7 @@
         </agm-marker>
     </agm-map>
 </div>
-<span *ngIf="selected_marker">
-    <marker-detail [selected_marker]="selected_marker"></marker-detail>     
-</span>
+
 
 
 

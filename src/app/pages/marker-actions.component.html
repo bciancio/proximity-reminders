@@ -12,9 +12,17 @@
 			<input type="checkbox" [checked]="marker.active" (change)="markerToggleActive(marker_index);">
 		</label>
 	</div>
-	<div class="marker-action" *ngIf="show_view_page_icon">
+	<div class="marker-action" *ngIf="show_details_overlay_icon">
 		<label>
-			<i class="material-icons" title="click to view details">pageview</i>
+			<div [ngSwitch]="marker.show_details_overlay" class="switch">
+				<div *ngSwitchCase="true" class="switch-case">
+					<i class="material-icons active-color-strong" title="click to hide details">pageview</i>
+				</div>
+				<div *ngSwitchCase="false" class="switch-case">
+					<i class="material-icons" title="click to view details">pageview</i>
+				</div>
+			</div>
+			<input type="checkbox" [checked]="marker.show_details_overlay" (change)="markerViewDetails(marker_index);">
 		</label>
 	</div>
 	<div class="switch marker-action">

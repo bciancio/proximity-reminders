@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Marker } from '../models/marker';
 
 @Component({
@@ -15,12 +15,20 @@ export class MarkerActionsComponent implements OnInit {
 	}
 
 	@Input() marker: Marker;
+	@Input() show_details_overlay_icon: boolean;
+	// @Input() show_details_overlay_icon: boolean;
+	@Output() onViewMarkerDetailsOverlay = new EventEmitter<Marker>();
+	
+	// show_details_overlay_icon = true;
 
-	show_view_page_icon = true;
-
-   // ***** Input Events *****
+    // ***** Input Events *****
     // ***** Input Events *****
     // Whenever a markers reminder has a status change then update the active value
+	markerViewDetails(marker_index: number) {
+		this.marker.show_details_overlay = !this.marker.show_details_overlay;
+		this.onViewMarkerDetailsOverlay.emit(this.marker);
+	}
+
 	markerToggleActive(marker_index: number) {        
 		let new_active_value = !this.marker.active;
 		this.marker.active = new_active_value;

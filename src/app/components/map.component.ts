@@ -33,16 +33,19 @@ export class MapComponent {
         this.markers = this.marker_service.getMarkers();        
     }
 
-    selectMarker(selected_marker: Marker) {
-        this.selected_marker = selected_marker;
-        this.logger.log(this.selected_marker);
-    }
-
     // ***** Map Events *****
     // ***** Map Events *****
 
     // ***** Marker Events *****
     // ***** Marker Events ***** 
+    displayMarkerDetailsOverlay(selected_marker: Marker) {
+        this.selected_marker = selected_marker;
+        this.logger.log('I am here');
+    }
+    // selectMarker(selected_marker: Marker) {
+    //     this.selected_marker = selected_marker;
+    //     this.logger.log(this.selected_marker);
+    // }
     addNewMarker(new_marker: Marker) {
         this.markers.push(new_marker)        
         this.logger.log(new_marker);
@@ -51,8 +54,8 @@ export class MapComponent {
     // When a marker is clicked, change the "selected" marker.
     clickedMarker(label: string, marker_index: number) {
         // this.markers[marker_index].locked = false;
-        // NOTE: Not sure that it makes sense to lock... this way tpye of thing.
-        this.selectMarker(this.markers[marker_index]);     
+        // NOTE: Not sure that it makes sense to lock... this way tpye of thing.                
+        this.selected_marker = this.markers[marker_index];
     }
 
     // Whenever you drag a marker around the map this listener gets called.

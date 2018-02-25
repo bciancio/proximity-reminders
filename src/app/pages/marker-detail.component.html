@@ -1,43 +1,3 @@
-<style>
-	.marker-detail .card-image img {
-		cursor: pointer;
-	}
-
-	.marker-detail {
-		
-		vertical-align: top;
-	}
-
-	.reminder-item,
-	.historic-item {
-		max-width: 400px;
-		margin-bottom: 5px !important;
-	}
-
-	.active-color-mild {
-		color: #84c7c1;
-	}
-
-	.active-color-strong {
-		color: #26a69a;
-	}
-
-	
-#sliders-n-proximity {
-  height: 3rem;
-}
-
-#sliders-n-proximity, .reminder-item {
-  padding: 0 .45rem;
-  margin: 0px;
-}
-
-.historic-item {
-  padding: 0 .75rem;
-}
-
-</style>
-
 <div class="marker-detail">
 	<div class="col s12 m7">
 		<div class="card horizontal">
@@ -60,7 +20,10 @@
 						</div>
 					</div>
 					<div id="sliders-n-proximity" class="row valign-wrapper">
-						<marker-actions [marker]="selected_marker"></marker-actions>
+						<marker-actions 
+							[marker]="selected_marker"
+							[show_details_overlay_icon]="show_details_overlay_icon">
+						</marker-actions>
 					<div>
 						<label for="marker-proximity">Proximity</label>
 						<div [ngSwitch]="selected_marker.locked" class="switch">

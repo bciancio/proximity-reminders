@@ -13,4 +13,12 @@ agm-map {
     display: inline-block;
     /* TODO: Has to be a better way... */
     width: var(--map-right-width); 
+    position: relative;
+}
+
+.map-marker-detial-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;    
+    z-index: 1;
 }

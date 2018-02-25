@@ -1,0 +1,37 @@
+.marker-detail .card-image img {
+    cursor: pointer;
+}
+
+.marker-detail {    
+    vertical-align: middle;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.reminder-item,
+.historic-item {
+    max-width: 400px;
+    padding: 5px;
+}
+
+.active-color-mild {
+    color: #84c7c1;
+}
+
+.active-color-strong {
+    color: #26a69a;
+}
+
+
+#sliders-n-proximity {
+height: 3rem;
+}
+
+#sliders-n-proximity, .reminder-item {
+padding: 0 .45rem;
+margin: 0px;
+}
+
+.historic-item {
+padding: 0 .75rem;
+}

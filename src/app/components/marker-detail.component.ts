@@ -16,5 +16,6 @@ export class MarkerDetailComponent {
     constructor(private logger: Logger) {}
 
     @Input() selected_marker: Marker;
-   
+
+    show_details_overlay_icon: boolean = false;
 }

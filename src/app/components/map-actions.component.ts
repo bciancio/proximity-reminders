@@ -17,7 +17,7 @@ export class MapActionsComponent implements OnInit {
 	}
 
 	@Output() onAddMarker = new EventEmitter<Marker>();
-
+	
 	geo_navigator = navigator.geolocation;
 	
 	
@@ -28,8 +28,10 @@ export class MapActionsComponent implements OnInit {
 		new_marker.proximity = 1;
 		new_marker.title = 'TEST';
 		new_marker.address = 'TEST';
-		new_marker.position = {};
-		
+		new_marker.position= {lat: undefined,
+							  lng: undefined
+							};
+
 		let actual_this = this;
 		if (this.geo_navigator) {
 

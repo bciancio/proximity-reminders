@@ -1,10 +1,16 @@
 <div class="markers-list">	
 	<span *ngIf="selected_marker">
-		<marker-card [marker]="selected_marker"></marker-card>
+		<marker-card 
+			[marker]="selected_marker"			
+			(onViewMarkerDetailsOverlay)="displayMarkerDetailsOverlay($event)">
+		</marker-card>
 	</span>
 	<div class="unselected-markers" *ngFor="let marker of markers; let marker_index = index">
 		<span *ngIf="marker != selected_marker">
-			<marker-card [marker]="marker"></marker-card>
+			<marker-card 
+				[marker]="marker"
+				(onViewMarkerDetailsOverlay)="displayMarkerDetailsOverlay($event)">
+			</marker-card>
 		</span>
 	</div>
 </div>
